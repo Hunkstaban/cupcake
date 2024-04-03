@@ -7,18 +7,18 @@ public class Cupcake {
     private String toppingName;
     private int totalPrice;
 
-    public Cupcake(int baseID, int toppingID, String baseName, String toppingName, int price) {
+    public Cupcake(int baseID, int toppingID, String baseName, String toppingName, int totalPrice) {
         this.baseID = baseID;
         this.toppingID = toppingID;
         this.baseName = baseName;
         this.toppingName = toppingName;
-        this.totalPrice = price;
+        this.totalPrice = totalPrice;
     }
 
-    public Cupcake(String baseName, String toppingName, int price) {
+    public Cupcake(String baseName, String toppingName, int totalPrice) {
         this.baseName = baseName;
         this.toppingName = toppingName;
-        this.totalPrice = price;
+        this.totalPrice = totalPrice;
     }
 
     public int getBaseID() {
