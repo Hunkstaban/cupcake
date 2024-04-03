@@ -34,10 +34,6 @@ public class User {
         this.roleID = roleID;
     }
 
-    public List<OrderDetail> getCartList() {
-        return cartList;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -49,4 +45,13 @@ public class User {
     public int getRoleID() {
         return roleID;
     }
+
+    public List<OrderDetail> getCartList() {
+        return cartList;
+    }
+
+    public void addToCart(int baseID, int toppingID, String baseName, String toppingName, int amount, int totalPrice) {
+        cartList.add(new OrderDetail(baseID, toppingID, baseName, toppingName, amount, totalPrice));
+    }
+
 }
