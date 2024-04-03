@@ -74,6 +74,7 @@
     justify-content: flex-start;
 
 }
+
 .headersrightside {
     /*display: flex;*/
     display: flex;
@@ -81,11 +82,13 @@
 
 
 }
+
 .headeremail {
     margin-right: 30px;
 }
+
 .aref:hover {
-color: #4c76e0;
+    color: #4c76e0;
 }
 
 .aref {
