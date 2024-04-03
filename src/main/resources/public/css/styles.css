@@ -1,0 +1,73 @@
+.h1 {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.h2 {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.p {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/********Phone********/
+
+@media screen and (max-width: 600px) {
+    .h1 {
+        font-family: Inter;
+        font-weight: 700;
+        font-size: 21px;
+        color: orange;
+    }
+
+    .h2 {
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 18px;
+        color: orange;
+    }
+
+    .p {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        color: orange;
+    }
+}
+
+/****************/
+
+.defbutton {
+    width: 250px;
+    height: 60px;
+    background-color: #E0E1E2;
+    border: none;
+    border-radius: 5px;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    transition: transform 0.2s ease-out;
+}
+
+.defbutton:hover {
+    background-color: #cbcbcb;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.green {
+    background-color: #8DFF92;
+    transition: transform 0.2s ease-out;
+}
+
+.green:hover {
+    background-color: #4ce052;
+    cursor: pointer;
+    transform: scale(1.1);
+}
