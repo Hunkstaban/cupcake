@@ -7,6 +7,14 @@ public class Cupcake {
     private String toppingName;
     private int price;
 
+    public Cupcake(int baseID, int toppingID, String baseName, String toppingName, int price) {
+        this.baseID = baseID;
+        this.toppingID = toppingID;
+        this.baseName = baseName;
+        this.toppingName = toppingName;
+        this.price = price;
+    }
+
     public Cupcake(String baseName, String toppingName, int price) {
         this.baseName = baseName;
         this.toppingName = toppingName;
