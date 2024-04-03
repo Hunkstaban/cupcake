@@ -29,9 +29,9 @@ public class CupcakeMapper {
 
                 String toppingName = rs.getString("topping_name");
                 String baseName = rs.getString("base_name");
-                int price = rs.getInt("topping_price") + rs.getInt("base_price");
+                int totalPrice = rs.getInt("topping_price") + rs.getInt("base_price");
 
-                return new Cupcake(baseID, toppingID, baseName, toppingName, price);
+                return new Cupcake(baseID, toppingID, baseName, toppingName, totalPrice);
             } else {
                 throw new DatabaseException("Error on addCupcake");
             }

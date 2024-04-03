@@ -5,20 +5,20 @@ public class Cupcake {
     private int toppingID;
     private String baseName;
     private String toppingName;
-    private int price;
+    private int totalPrice;
 
     public Cupcake(int baseID, int toppingID, String baseName, String toppingName, int price) {
         this.baseID = baseID;
         this.toppingID = toppingID;
         this.baseName = baseName;
         this.toppingName = toppingName;
-        this.price = price;
+        this.totalPrice = price;
     }
 
     public Cupcake(String baseName, String toppingName, int price) {
         this.baseName = baseName;
         this.toppingName = toppingName;
-        this.price = price;
+        this.totalPrice = price;
     }
 
     public int getBaseID() {
@@ -37,7 +37,7 @@ public class Cupcake {
         return toppingName;
     }
 
-    public int getPrice() {
-        return price;
+    public int getTotalPrice() {
+        return totalPrice;
     }
 }
