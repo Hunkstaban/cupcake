@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.entities.User;
+import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.OrderDetailMapper;
 import io.javalin.*;
@@ -27,6 +28,15 @@ public class OrderController {
     }
 
     public static void newOrder(Context ctx, ConnectionPool connectionPool) {
+
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            int orderID = OrderDetailMapper.newOrder(user, connectionPool);
+            OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
+        } catch (DatabaseException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

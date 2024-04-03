@@ -34,6 +34,10 @@ public class User {
         this.roleID = roleID;
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
     public String getEmail() {
         return email;
     }
