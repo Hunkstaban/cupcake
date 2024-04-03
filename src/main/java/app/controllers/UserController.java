@@ -23,7 +23,7 @@ public class UserController {
 
 
     }
-// .invalidate = we dont need it anymore. and want to close it.
+// .invalidate = we don't need it anymore. and want to close it.
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.render("index.html");
@@ -35,15 +35,15 @@ public class UserController {
         String password = ctx.formParam("password");
 
         try {
-            // TODO ask that boys = sessionAtrribute hele page??
+
 
             User user = UserMapper.login(email, password, connectionPool);
-            ctx.sessionAttribute("currentUser : ", user);
+            ctx.sessionAttribute("currentUser", user);
             ctx.render("index.html");
-            List<Order> cartList = CupcakeMapper.getCart() // TODO what we do here + make getcart method ??
-            ctx.attribute("cart : ", cartList);
+//            List<Order> cartList = CupcakeMapper.getCart() // TODO what we do here + make getcart method ??
+//            ctx.attribute("cart : ", cartList);
 
-            // TODO ask that boys = Atrribute er den ene command ??
+
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
