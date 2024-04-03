@@ -6,14 +6,14 @@ public class OrderDetail {
     private int baseID;
     private int toppingID;
     private int amount;
-    private int price;
+    private int totalPrice;
     private int orderID;
 
-    public OrderDetail(int baseID, int toppingID, int amount, int price, int orderID) {
+    public OrderDetail(int baseID, int toppingID, int amount, int totalPrice, int orderID) {
         this.baseID = baseID;
         this.toppingID = toppingID;
         this.amount = amount;
-        this.price = price;
+        this.totalPrice = totalPrice;
         this.orderID = orderID;
     }
 
@@ -33,8 +33,8 @@ public class OrderDetail {
         return amount;
     }
 
-    public int getPrice() {
-        return price;
+    public int getTotalPrice() {
+        return totalPrice;
     }
 
     public int getOrderID() {
