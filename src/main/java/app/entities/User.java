@@ -1,11 +1,15 @@
 package app.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private int userID;
     private String email;
     private String password;
     private int roleID;
+    private List<OrderDetail> cartList = new ArrayList<>();
 
     public User(int userID, String email, String password, int roleID) {
         this.userID = userID;
@@ -30,6 +34,10 @@ public class User {
         this.roleID = roleID;
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -41,4 +49,13 @@ public class User {
     public int getRoleID() {
         return roleID;
     }
+
+    public List<OrderDetail> getCartList() {
+        return cartList;
+    }
+
+    public void addToCart(int baseID, int toppingID, String baseName, String toppingName, int amount, int totalPrice) {
+        cartList.add(new OrderDetail(baseID, toppingID, baseName, toppingName, amount, totalPrice));
+    }
+
 }

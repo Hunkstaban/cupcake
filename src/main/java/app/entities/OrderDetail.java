@@ -5,6 +5,8 @@ public class OrderDetail {
     private int orderDetailID;
     private int baseID;
     private int toppingID;
+    private String baseName;
+    private String toppingName;
     private int amount;
     private int totalPrice;
     private int orderID;
@@ -15,6 +17,15 @@ public class OrderDetail {
         this.amount = amount;
         this.totalPrice = totalPrice;
         this.orderID = orderID;
+    }
+
+    public OrderDetail(int baseID, int toppingID, String baseName, String toppingName, int amount, int totalPrice) {
+        this.baseID = baseID;
+        this.toppingID = toppingID;
+        this.baseName = baseName;
+        this.toppingName = toppingName;
+        this.amount = amount;
+        this.totalPrice = totalPrice;
     }
 
     public int getOrderDetailID() {
