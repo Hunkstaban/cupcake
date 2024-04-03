@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class CupcakeMapper {
 
 
-    public Topping getToppingByID(int toppingID, ConnectionPool connectionPool) throws DatabaseException {
+    public static Topping getToppingByID(int toppingID, ConnectionPool connectionPool) throws DatabaseException {
 
         String sql = "SELECT * FROM topping WHERE topping_id = ?";
 
@@ -36,7 +36,7 @@ public class CupcakeMapper {
 
     }
 
-    public Base getBaseByID(int baseID, ConnectionPool connectionPool) throws DatabaseException {
+    public static Base getBaseByID(int baseID, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT * FROM topping WHERE base_id = ?";
 
         try (Connection connection = connectionPool.getConnection();
