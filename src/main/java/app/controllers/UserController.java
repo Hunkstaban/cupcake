@@ -20,12 +20,12 @@ public class UserController {
 
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
-        app.get("opret", ctx -> opret(ctx, connectionPool));
+        app.get("create", ctx -> createUser(ctx, connectionPool));
 
 
     }
 
-    private static void opret(Context ctx, ConnectionPool connectionPool) {
+    private static void createUser(Context ctx, ConnectionPool connectionPool) {
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
@@ -37,7 +37,7 @@ public class UserController {
             ctx.render("index.html");
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("opret.html");
+            ctx.render("create.html");
         }
     }
 
