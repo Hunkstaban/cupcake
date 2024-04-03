@@ -20,10 +20,28 @@ public class UserController {
 
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
+        app.get("create", ctx -> createUser(ctx, connectionPool));
 
 
     }
-// .invalidate = we don't need it anymore. and want to close it.
+
+    private static void createUser(Context ctx, ConnectionPool connectionPool) {
+        String email = ctx.formParam("email");
+        String password = ctx.formParam("password");
+
+        try {
+            UserMapper.createUser(email,password,connectionPool);
+            // TODO Kan man ikke bare kalde "login" methoden?
+            User user = UserMapper.login(email,password,connectionPool);
+            ctx.sessionAttribute("currentUser", user);
+            ctx.render("index.html");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("create.html");
+        }
+    }
+
+    // .invalidate = we don't need it anymore. and want to close it.
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.render("index.html");
