@@ -15,10 +15,11 @@ public class UserMapper {
 
         String sql = "SELECT * FROM users WHERE email=? AND password=?";
 
-        try {
-            Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
+        ) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
 
@@ -45,11 +46,10 @@ public class UserMapper {
 
         String sql = "INSERT INTO users (email,password) VALUES(?,?)";
 
-        try {
-            Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
 
