@@ -29,9 +29,8 @@ public class UserMapper {
             if (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
                 int roleId = resultSet.getInt("role_id");
-                // TODO ask tha boys = hvorfor har vi ikke lavet en constructor med user id ?
-                // TODO ask tha boys = hvorfor create new user når vi laver "login" method ?
-                return new User(email, password, roleId);
+
+                return new User(userId, email, password, roleId);
             } else throw new DatabaseException("fejl i login. check din syntax");
 
         } catch (SQLException e) {

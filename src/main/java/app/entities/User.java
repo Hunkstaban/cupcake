@@ -7,6 +7,13 @@ public class User {
     private String password;
     private int roleID;
 
+    public User(int userID, String email, String password, int roleID) {
+        this.userID = userID;
+        this.email = email;
+        this.password = password;
+        this.roleID = roleID;
+    }
+
     public User(int userID) {
         this.userID = userID;
     }
