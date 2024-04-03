@@ -13,25 +13,25 @@ public class UserMapper {
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
 
 
-        String sql = "select * from users where email=? and password=?";
+        String sql = "SELECT * FROM users WHERE email=? AND password=?";
 
         try {
             Connection connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1,email);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
 
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-        if (resultSet.next()) {
-            int userId =resultSet.getInt("userID");
-            int roleId =resultSet.getInt("roleID");
-            // TODO ask tha boys = hvorfor har vi ikke lavet en constructor med user id ?
-            // TODO ask tha boys = hvorfor create new user når vi laver "login" method ?
-            return new User(email, password, roleId);
-        }else throw new DatabaseException("fejl i login. check din syntax");
+            if (resultSet.next()) {
+                int userId = resultSet.getInt("user_id");
+                int roleId = resultSet.getInt("role_id");
+                // TODO ask tha boys = hvorfor har vi ikke lavet en constructor med user id ?
+                // TODO ask tha boys = hvorfor create new user når vi laver "login" method ?
+                return new User(email, password, roleId);
+            } else throw new DatabaseException("fejl i login. check din syntax");
 
         } catch (SQLException e) {
             throw new DatabaseException("noget gik galt med databasen " + e.getMessage());
@@ -41,15 +41,13 @@ public class UserMapper {
     }
 
 
-    public static void createUser (String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+    public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
 
-        String sql = "insert into users (email,password) values(?,?)";
+        String sql = "INSERT INTO users (email,password) VALUES(?,?)";
 
         try {
             Connection connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            ResultSet resultSet = preparedStatement.executeQuery(sql);
 
 
             preparedStatement.setString(1, email);
@@ -66,13 +64,11 @@ public class UserMapper {
         } catch (SQLException e) {
 
             String msg = "Der er sket en fejl. Prøv igen";
-            if (e.getMessage().startsWith("ERROR: duplicate key value "))
-            {
-                msg = "Brugernavnet findes allerede. Vælg et andet";
+            if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
+                msg = "email findes allerede. Prøv igen";
             }
             throw new DatabaseException(msg, e.getMessage());
         }
-
 
 
     }
