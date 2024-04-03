@@ -16,6 +16,10 @@
 }
 
 #loginH1 {
+    margin-bottom: 5px;
+}
+
+#opretH1 {
     margin-bottom: 35px;
 }
 
@@ -25,7 +29,7 @@
 
 .input {
     border-collapse: unset;
-    width: 360px;
+    width: 340px;
     height: 42px;
     border-radius: 5px;
     border: 1px solid #BDBDBD;
@@ -33,7 +37,7 @@
     margin: 0px 0px 25px 0px;
 }
 
-#termsText {
+.termsText {
     font-size: 13px;
     margin-bottom: 25px;
 }
@@ -41,4 +45,10 @@
 .label {
     display: block;
     margin-bottom: 11px;
+}
+
+.opretKonto {
+    display: block;
+    margin-bottom: 35px;
+    color: black;
 }

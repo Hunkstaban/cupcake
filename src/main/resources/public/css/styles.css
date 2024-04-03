@@ -53,12 +53,13 @@
     font-weight: 400;
     font-size: 18px;
     transition: transform 0.2s ease-out;
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 .defbutton:hover {
     background-color: #cbcbcb;
     cursor: pointer;
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
 }
 
 .green {
