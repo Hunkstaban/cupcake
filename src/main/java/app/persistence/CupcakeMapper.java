@@ -39,7 +39,7 @@ public class CupcakeMapper {
     }
 
     public static Base getBaseByID(int baseID, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT * FROM topping WHERE base_id = ?";
+        String sql = "SELECT * FROM base WHERE base_id = ?";
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -48,8 +48,8 @@ public class CupcakeMapper {
 
             if (rs.next()) {
 
-                String baseName = rs.getString("topping_name");
-                int basePrice = rs.getInt("topping_price");
+                String baseName = rs.getString("base_name");
+                int basePrice = rs.getInt("base_price");
                 return new Base(baseID, baseName, basePrice);
             } else {
                 throw new DatabaseException("Error topping not found");

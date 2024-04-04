@@ -26,7 +26,7 @@
             <!--  TODO thymelead link til mail,saldo og cart ikon  -->
 
             <div class="headersleftside">
-                <p class="headersaldo p">    Saldo: 1.000kr</p>
+                <p class="headersaldo p"> Saldo: 1.000kr</p>
             </div>
 
             <!--  TODO  indsæt billed her    -->
@@ -73,32 +73,33 @@
                 <option th:each="base : ${baseList}" th:value="${base.baseID}" th:text="${base.baseName + ' - ' + base.basePrice + ' kr.'}"></option>
             </select>
 
-            <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding">
-                <option>Vælg top</option>
-                <option th:each="topping : ${toppingList}" th:value="${topping.toppingID}" th:text="${topping.toppingName + ' - ' + topping.toppingPrice + ' kr.'}"></option>
-            </select>
+                <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding">
+                    <option value="">Vælg top</option>
+                    <option th:each="topping : ${toppingList}" th:value="${topping.toppingID}"
+                            th:text="${topping.toppingName + ' - ' + topping.toppingPrice + ' kr.'}"></option>
+                </select>
 
-            <select name="amount" id="antal" class="defbutton dropdownPadding">
-                <option>Antal</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </div>
+                <select name="amount" id="antal" class="defbutton dropdownPadding">
+                    <option value="">Antal</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
 
-        <div class="lægikurv">
-            <button class="defbutton green">
-                Læg i kurv
-            </button>
-        </div>
-
+            <div class="lægikurv">
+                <button type="submit" formaction="addToCart" class="defbutton green">
+                    Læg i kurv
+                </button>
+            </div>
+        </form>
     </div>
 
 </div>
