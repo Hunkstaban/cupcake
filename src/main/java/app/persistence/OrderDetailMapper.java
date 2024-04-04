@@ -49,8 +49,8 @@ public class OrderDetailMapper {
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 // Retrieve the generated order_id
-                int orderId = generatedKeys.getInt(1);
-                return orderId;
+                int orderID = generatedKeys.getInt(1);
+                return orderID;
             } else {
                 throw new DatabaseException("Fejl i opdatering af en task - kunne ikke hente det autogenererede order_id");
             }

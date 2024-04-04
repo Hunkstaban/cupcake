@@ -54,8 +54,6 @@ public class UserController {
         String password = ctx.formParam("password");
 
         try {
-
-
             User user = UserMapper.login(email, password, connectionPool);
             userLogin(ctx, connectionPool, user);
 //            ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
