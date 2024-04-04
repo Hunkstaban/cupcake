@@ -16,7 +16,7 @@ public class OrderController {
     }
 
 
-    public static void addToCart(Context ctx, ConnectionPool connectionPool) {
+    private static void addToCart(Context ctx, ConnectionPool connectionPool) {
         int baseID = Integer.parseInt(ctx.formParam("baseID"));
         int toppingID = Integer.parseInt(ctx.formParam("toppingID"));
         int amount = Integer.parseInt(ctx.formParam("amount"));
@@ -27,7 +27,7 @@ public class OrderController {
 
     }
 
-    public static void newOrder(Context ctx, ConnectionPool connectionPool) {
+    private static void newOrder(Context ctx, ConnectionPool connectionPool) {
 
         User user = ctx.sessionAttribute("currentUser");
         try {

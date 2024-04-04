@@ -30,11 +30,8 @@ public class UserController {
         String password = ctx.formParam("password");
 
         try {
-            UserMapper.createUser(email,password,connectionPool);
-            // TODO Kan man ikke bare kalde "login" methoden?
-            User user = UserMapper.login(email,password,connectionPool);
-            ctx.sessionAttribute("currentUser", user);
-            ctx.render("index.html");
+            User newUser = UserMapper.createUser(email,password,connectionPool);
+            userLogin(ctx, connectionPool, newUser);
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("create.html");
@@ -44,7 +41,7 @@ public class UserController {
     // .invalidate = we don't need it anymore. and want to close it.
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
-        ctx.render("index.html");
+        ctx.render("login.html");
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {
@@ -56,8 +53,8 @@ public class UserController {
 
 
             User user = UserMapper.login(email, password, connectionPool);
-            ctx.sessionAttribute("currentUser", user);
-            ctx.render("index.html");
+            userLogin(ctx, connectionPool, user);
+
 //            List<Order> cartList = CupcakeMapper.getCart() // TODO what we do here + make getcart method ??
 //            ctx.attribute("cart : ", cartList);
 
@@ -66,6 +63,15 @@ public class UserController {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
+    }
+
+    private static void userLogin(Context ctx, ConnectionPool connectionPool, User user) {
+        ctx.sessionAttribute("currentUser", user);
+        List<Base> baseList = CupcakeMapper.getAllBases(connectionPool);
+        ctx.attribute("baseList", baseList);
+        List<Topping> toppingList = CupcakeMapper.getAllToppings(connectionPool);
+        ctx.attribute("toppingList", toppingList);
+        ctx.render("index.html");
     }
 
 
