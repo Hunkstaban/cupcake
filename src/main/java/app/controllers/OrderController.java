@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.entities.OrderDetail;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -7,12 +8,26 @@ import app.persistence.OrderDetailMapper;
 import io.javalin.*;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderController {
 
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         //app.post("movetask", ctx -> moveTask(ctx, connectionPool));
         app.post("addToCart", ctx -> addToCart(ctx, connectionPool));
+        app.get("goToCart", ctx -> goToCart(ctx, connectionPool));
+    }
+
+    private static void goToCart(Context ctx, ConnectionPool connectionPool) {
+
+        User user = ctx.sessionAttribute("currentUser");
+        List<OrderDetail> cartList = user.getCartList();
+        ctx.attribute("cartList", cartList);
+        ctx.render("cart.html");
+
+
     }
 
 

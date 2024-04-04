@@ -16,12 +16,15 @@ public class CupcakeMapper {
 
     public static Topping getToppingByID(int toppingID, ConnectionPool connectionPool) throws DatabaseException {
 
-        String sql = "SELECT * FROM topping WHERE topping_id = ?";
+        String sql = "SELECT * FROM toppings WHERE topping_id = ?";
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
+            ps.setInt(1, toppingID);
+
             ResultSet rs = ps.executeQuery();
+
 
             if (rs.next()) {
 
@@ -32,6 +35,7 @@ public class CupcakeMapper {
                 throw new DatabaseException("Error topping not found");
             }
 
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -39,20 +43,22 @@ public class CupcakeMapper {
     }
 
     public static Base getBaseByID(int baseID, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT * FROM base WHERE base_id = ?";
+        String sql = "SELECT * FROM bases WHERE base_id = ?";
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
+            ps.setInt(1, baseID);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
 
+            if (rs.next()) {
                 String baseName = rs.getString("base_name");
                 int basePrice = rs.getInt("base_price");
                 return new Base(baseID, baseName, basePrice);
+
             } else {
-                throw new DatabaseException("Error topping not found");
+                throw new DatabaseException("Error no base found");
             }
 
         } catch (SQLException e) {
@@ -105,9 +111,6 @@ public class CupcakeMapper {
 
         return baseList;
     }
-
-
-
 
 
 }

@@ -36,6 +36,14 @@ public class OrderDetail {
         return baseID;
     }
 
+    public String getBaseName() {
+        return baseName;
+    }
+
+    public String getToppingName() {
+        return toppingName;
+    }
+
     public int getToppingID() {
         return toppingID;
     }
