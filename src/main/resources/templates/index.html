@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,7 +10,8 @@
 
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/indexStyle.css">
+    <link rel="stylesheet" href="../public/css/indexStyle.css"
+          th:href="@{/css/indexStyle.css}">
 
 
     <title>Index</title>
@@ -23,7 +26,7 @@
             <!--  TODO thymelead link til mail,saldo og cart ikon  -->
 
             <div class="headersleftside">
-                <p class="headersaldo p"> Saldo: 1.000kr</p>
+                <p class="headersaldo p">    Saldo: 1.000kr</p>
             </div>
 
             <!--  TODO  indsæt billed her    -->
@@ -66,7 +69,8 @@
 
         <div id="select">
             <select name="bund" id="bund" class="defbutton dropdownmarginright dropdownPadding">
-                <option value="bund">Bund</option>
+                <option>Vælg bund</option>
+                <option th:each="base : ${baseList}" th:value="${baseList.baseID}" th:text="${baseList.baseName + ' - ' + baseList.basePrice + ' kr.'}"></option>
             </select>
 
             <select name="top" id="top" class="defbutton dropdownmarginright dropdownPadding">

@@ -57,7 +57,14 @@ public class UserController {
 
 
             User user = UserMapper.login(email, password, connectionPool);
-            userLogin(ctx, connectionPool, user);
+//            userLogin(ctx, connectionPool, user);
+            ctx.sessionAttribute("currentUser", user);
+            List<Base> baseList = CupcakeMapper.getAllBases(connectionPool);
+            ctx.attribute("baseList", baseList);
+            List<Topping> toppingList = CupcakeMapper.getAllToppings(connectionPool);
+            ctx.attribute("toppingList", toppingList);
+//            ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
+            ctx.render("index.html");
 
 //            List<Order> cartList = CupcakeMapper.getCart() // TODO what we do here + make getcart method ??
 //            ctx.attribute("cart : ", cartList);
@@ -67,16 +74,13 @@ public class UserController {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
+
     }
 
     private static void userLogin(Context ctx, ConnectionPool connectionPool, User user) {
         ctx.sessionAttribute("currentUser", user);
-        List<Base> baseList = CupcakeMapper.getAllBases(connectionPool);
-        ctx.attribute("baseList", baseList);
-        List<Topping> toppingList = CupcakeMapper.getAllToppings(connectionPool);
-        ctx.attribute("toppingList", toppingList);
+        ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
         ctx.render("index.html");
     }
-
 
 }// ---------------------------------  end class ------------------------------------

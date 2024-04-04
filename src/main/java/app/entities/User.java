@@ -9,12 +9,14 @@ public class User {
     private String email;
     private String password;
     private int roleID;
+    private int balance;
     private List<OrderDetail> cartList = new ArrayList<>();
 
-    public User(int userID, String email, String password, int roleID) {
+    public User(int userID, String email, String password, int balance, int roleID) {
         this.userID = userID;
         this.email = email;
         this.password = password;
+        this.balance = balance;
         this.roleID = roleID;
     }
 

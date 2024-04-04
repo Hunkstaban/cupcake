@@ -29,8 +29,9 @@ public class UserMapper {
             if (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
                 int roleId = resultSet.getInt("role_id");
+                int balance = resultSet.getInt("balance");
 
-                return new User(userId, email, password, roleId);
+                return new User(userId, email, password, roleId, balance);
             } else throw new DatabaseException("fejl i login. check din syntax");
 
         } catch (SQLException e) {
