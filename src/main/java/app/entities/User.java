@@ -12,12 +12,12 @@ public class User {
     private int balance;
     private List<OrderDetail> cartList = new ArrayList<>();
 
-    public User(int userID, String email, String password, int balance, int roleID) {
+    public User(int userID, String email, String password, int roleID, int balance) {
         this.userID = userID;
         this.email = email;
         this.password = password;
-        this.balance = balance;
         this.roleID = roleID;
+        this.balance = balance;
     }
 
     public User(int userID) {

@@ -25,6 +25,9 @@ public class OrderController {
         OrderDetailMapper.addToCart(baseID, toppingID, amount, user, connectionPool);
 
 
+        ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
+        ctx.render("index.html");
+
     }
 
     private static void newOrder(Context ctx, ConnectionPool connectionPool) {

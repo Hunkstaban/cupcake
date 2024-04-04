@@ -66,12 +66,13 @@
             </h2>
 
         </div>
-
-        <div id="select">
-            <select name="base" id="bund" class="defbutton dropdownmarginright dropdownPadding">
-                <option>Vælg bund</option>
-                <option th:each="base : ${baseList}" th:value="${base.baseID}" th:text="${base.baseName + ' - ' + base.basePrice + ' kr.'}"></option>
-            </select>
+        <form method="post">
+            <div id="select">
+                <select name="base" id="bund" class="defbutton dropdownmarginright dropdownPadding">
+                    <option value="">Vælg bund</option>
+                    <option th:each="base : ${baseList}" th:value="${base.baseID}"
+                            th:text="${base.baseName + ' - ' + base.basePrice + ' kr.'}"></option>
+                </select>
 
                 <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding">
                     <option value="">Vælg top</option>
