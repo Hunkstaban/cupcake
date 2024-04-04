@@ -57,12 +57,7 @@ public class UserController {
 
 
             User user = UserMapper.login(email, password, connectionPool);
-//            userLogin(ctx, connectionPool, user);
-            ctx.sessionAttribute("currentUser", user);
-            List<Base> baseList = CupcakeMapper.getAllBases(connectionPool);
-            ctx.attribute("baseList", baseList);
-            List<Topping> toppingList = CupcakeMapper.getAllToppings(connectionPool);
-            ctx.attribute("toppingList", toppingList);
+            userLogin(ctx, connectionPool, user);
 //            ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
             ctx.render("index.html");
 

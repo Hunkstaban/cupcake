@@ -17,8 +17,8 @@ public class OrderController {
 
 
     private static void addToCart(Context ctx, ConnectionPool connectionPool) {
-        int baseID = Integer.parseInt(ctx.formParam("baseID"));
-        int toppingID = Integer.parseInt(ctx.formParam("toppingID"));
+        int baseID = Integer.parseInt(ctx.formParam("base"));
+        int toppingID = Integer.parseInt(ctx.formParam("topping"));
         int amount = Integer.parseInt(ctx.formParam("amount"));
 
         User user = ctx.sessionAttribute("currentUser");
