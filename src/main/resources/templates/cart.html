@@ -56,6 +56,13 @@
             <h1 class="h1">
                 Indkøbskurv
             </h1>
+            <table>
+                <tr th:each="cart : ${cartList}">
+                    <td th:text="${cart.baseName}"></td>
+                    <td th:text="${cart.toppingName}"></td>
+                    <td th:text="${cart.amount}"></td>
+                </tr>
+            </table>
 
         </div>
 
