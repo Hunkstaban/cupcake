@@ -41,7 +41,7 @@ public class UserMapper {
     }
 
 
-    public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+    public static User createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
 
         String sql = "INSERT INTO users (email,password) VALUES(?,?)";
 
@@ -52,13 +52,9 @@ public class UserMapper {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
 
-            int rowsUpdated = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
-            // if our rowsUpdated are "not equal to 1" throw Exception.
-            // because when we create a new user we should get 1 new row
-            if (rowsUpdated != 1) {
-                throw new DatabaseException("Fejl i oprettelse af bruger");
-            }
+            return login(email, password, connectionPool);
 
         } catch (SQLException e) {
 

@@ -1,6 +1,8 @@
 package app.controllers;
 
+import app.entities.Base;
 import app.entities.Order;
+import app.entities.Topping;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -38,7 +40,9 @@ public class UserController {
         }
     }
 
-    // .invalidate = we don't need it anymore. and want to close it.
+
+
+    // .invalidate() = we don't need it anymore. and want to close it.
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.render("login.html");
