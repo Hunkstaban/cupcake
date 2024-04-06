@@ -77,7 +77,7 @@ public class UserController {
     private static void adminLogin(Context ctx, ConnectionPool connectionPool, User user) {
         ctx.sessionAttribute("currentUser", user);
         // will need attribute from not yet created viewALlOrders method (OrderController/Mapper)
-        ctx.render("order.html");
+        ctx.render("orders.html");
     }
 
 }// ---------------------------------  end class ------------------------------------
