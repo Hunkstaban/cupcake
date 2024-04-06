@@ -5,6 +5,7 @@ import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.OrderDetailMapper;
+import app.persistence.UserMapper;
 import io.javalin.*;
 import io.javalin.http.Context;
 
@@ -57,9 +58,15 @@ public class OrderController {
 
         User user = ctx.sessionAttribute("currentUser");
 
-        // Update User balance and check if they have enough money to complete the transaction
-        int currentUserBalance = user.getBalance();
+        // Update User balance and check if they have enough money to complete the transaction (using UserMapper)
+        int orderTotalPrice = ctx.attribute("orderTotalPrice");
+        try {
+            UserMapper.updateBalance(user, orderTotalPrice, connectionPool);
+        } catch (DatabaseException e) {
+            throw new RuntimeException(e);
+        }
 
+        // If no errors in User balance check, create new order
         try {
             int orderID = OrderDetailMapper.newOrder(user, connectionPool);
             OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);

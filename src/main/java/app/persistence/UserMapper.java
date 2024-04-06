@@ -69,5 +69,38 @@ public class UserMapper {
 
     }
 
+    public static void updateBalance(User user, int orderTotalPrice, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE users SET balance = ? WHERE user_id = ?";
+
+        int currentBalance = user.getBalance();
+        if (currentBalance < orderTotalPrice) {
+            throw new DatabaseException("Insufficient funds to complete transaction");
+        } else {
+            int newBalance = currentBalance - orderTotalPrice;
+            try (
+                    Connection connection = connectionPool.getConnection();
+                    PreparedStatement ps = connection.prepareStatement(sql)
+            ) {
+                ps.setInt(1, newBalance);
+                ps.setInt(2, user.getUserID());
+
+                int rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected != 1) {
+                    throw new DatabaseException("Error updating balance for user " + user.getUserID());
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+
+
+
+
+    }
 
 }// ---------------------- end class ------------------------------------
