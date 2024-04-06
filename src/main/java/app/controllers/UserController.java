@@ -55,13 +55,11 @@ public class UserController {
 
         try {
             User user = UserMapper.login(email, password, connectionPool);
-            userLogin(ctx, connectionPool, user);
-//            ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
-            ctx.render("index.html");
-
-//            List<Order> cartList = CupcakeMapper.getCart() // TODO what we do here + make getcart method ??
-//            ctx.attribute("cart : ", cartList);
-
+            if (user.getRoleID() == 2) {
+                adminLogin(ctx, connectionPool, user);
+            } else {
+                userLogin(ctx, connectionPool, user);
+            }
 
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
@@ -74,6 +72,12 @@ public class UserController {
         ctx.sessionAttribute("currentUser", user);
         ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
         ctx.render("index.html");
+    }
+
+    private static void adminLogin(Context ctx, ConnectionPool connectionPool, User user) {
+        ctx.sessionAttribute("currentUser", user);
+        // will need attribute from not yet created viewALlOrders method (OrderController/Mapper)
+        ctx.render("order.html");
     }
 
 }// ---------------------------------  end class ------------------------------------
