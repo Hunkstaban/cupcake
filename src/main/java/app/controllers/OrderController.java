@@ -24,7 +24,15 @@ public class OrderController {
 
         User user = ctx.sessionAttribute("currentUser");
         List<OrderDetail> cartList = user.getCartList();
+
+        //Figure out the total price of the order so it can be sent as an attribute
+        int orderTotalPrice = 0;
+        for (OrderDetail orderDetail : cartList) {
+            orderTotalPrice += orderDetail.getTotalPrice();
+        }
+
         ctx.attribute("cartList", cartList);
+        ctx.attribute("orderTotalPrice", orderTotalPrice);
         ctx.render("cart.html");
 
 
@@ -48,6 +56,10 @@ public class OrderController {
     private static void newOrder(Context ctx, ConnectionPool connectionPool) {
 
         User user = ctx.sessionAttribute("currentUser");
+
+        // Update User balance and check if they have enough money to complete the transaction
+        int currentUserBalance = user.getBalance();
+
         try {
             int orderID = OrderDetailMapper.newOrder(user, connectionPool);
             OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
