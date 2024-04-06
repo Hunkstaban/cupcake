@@ -64,4 +64,7 @@ public class User {
         cartList.add(new OrderDetail(baseID, toppingID, baseName, toppingName, amount, totalPrice));
     }
 
+    public void emptyCart() {
+        cartList.clear();
+    }
 }

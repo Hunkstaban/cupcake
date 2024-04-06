@@ -70,6 +70,11 @@ public class OrderController {
         try {
             int orderID = OrderDetailMapper.newOrder(user, connectionPool);
             OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
+
+            // If order completed, empty currentUser's cart and refresh the page, sending orderID as an attribute
+            user.emptyCart();
+            ctx.attribute("orderID", orderID);
+            ctx.render("cart.html");
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
         }
