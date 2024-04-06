@@ -52,6 +52,10 @@ public class User {
         return roleID;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
     public List<OrderDetail> getCartList() {
         return cartList;
     }
