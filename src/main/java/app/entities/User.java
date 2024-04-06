@@ -64,6 +64,12 @@ public class User {
         cartList.add(new OrderDetail(baseID, toppingID, baseName, toppingName, amount, totalPrice));
     }
 
+    public void removeFromCart(int index) {
+
+        cartList.remove(index);
+    }
+
+
     public void emptyCart() {
         cartList.clear();
     }

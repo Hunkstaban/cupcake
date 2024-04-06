@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/indexStyle.css">
+    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../public/css/indexStyle.css" th:href="@{/css/indexStyle.css}">
 
 
     <title>Cart</title>
@@ -57,13 +57,19 @@
                 Indkøbskurv
             </h1>
             <table>
-                <tr th:each="cart : ${cartList}">
+                <tr th:each="cart, index : ${cartList}">
                     <td th:text="${cart.baseName}"></td>
                     <td th:text="${cart.toppingName}"></td>
                     <td th:text="${cart.amount}"></td>
+                    <td th:text="${index.index}"></td>
+                    <td>
+                        <form th:action="@{/removeFromCart}" method="post">
+                            <input type="hidden" name="cartIndex" th:value="${index.index}">
+                        <button type="submit">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
-
         </div>
 
         <div class="lægikurv">
@@ -71,7 +77,6 @@
                 Bestil
             </button>
         </div>
-
     </div>
 
 </div>
