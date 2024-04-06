@@ -25,22 +25,24 @@
             <!--  TODO thymelead link til mail,saldo og cart ikon  -->
 
             <div class="headersleftside">
-                <p class="headersaldo p"> Saldo: 1.000kr</p>
+                <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span></p>
             </div>
 
             <!--  TODO  indsæt billed her    -->
 
             <div class="headersrightside">
                 <p class="headeremail p">
-                    <a class="aref" href="login.html">
-                        email@email.dk
+                    <a class="aref" href="login.html" th:text="${session.currentUser.email}">
                     </a>
                 </p>
 
+                <div class="cart-img-container">
                 <p class="headercart p">
                     <a href="cart.html">
                         <img src="../images/cart.png" height="40" width="40"/>
+
                     </a>
+                </div>
                 </p>
 
             </div>
@@ -67,19 +69,19 @@
         </div>
         <form method="post">
             <div id="select">
-                <select name="base" id="bund" class="defbutton dropdownmarginright dropdownPadding">
+                <select name="base" id="bund" class="defbutton dropdownmarginright dropdownPadding" required>
                     <option value="">Vælg bund</option>
                     <option th:each="base : ${baseList}" th:value="${base.baseID}"
                             th:text="${base.baseName + ' - ' + base.basePrice + ' kr.'}"></option>
                 </select>
 
-                <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding">
+                <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding" required>
                     <option value="">Vælg top</option>
                     <option th:each="topping : ${toppingList}" th:value="${topping.toppingID}"
                             th:text="${topping.toppingName + ' - ' + topping.toppingPrice + ' kr.'}"></option>
                 </select>
 
-                <select name="amount" id="antal" class="defbutton dropdownPadding">
+                <select name="amount" id="antal" class="defbutton dropdownPadding" required>
                     <option value="">Antal</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -95,16 +97,17 @@
             </div>
 
             <div class="lægikurv">
+
                 <button type="submit" formaction="addToCart" class="defbutton green">
                     Læg i kurv
                 </button>
+                </form>
+                <form method="get">
+                    <button formaction="goToCart" class="defbutton green">
+                        Gå til kurv
+                    </button>
+                </form>
             </div>
-        </form>
-        <form method="get">
-            <button formaction="goToCart" class="defbutton green">
-                Gå til kurv
-            </button>
-        </form>
     </div>
 
 </div>

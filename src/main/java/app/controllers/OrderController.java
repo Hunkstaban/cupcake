@@ -30,7 +30,7 @@ public class OrderController {
 
                 User user = ctx.sessionAttribute("currentUser");
                 user.removeFromCart(cartIndex);
-                goToCart(ctx, connectionPool);
+                ctx.redirect("goToCart");
 
         } catch (Exception e) {
             System.out.println("Error removing item from cart");
@@ -51,7 +51,6 @@ public class OrderController {
         ctx.attribute("cartList", cartList);
         ctx.attribute("orderTotalPrice", orderTotalPrice);
         ctx.render("cart.html");
-
 
     }
 

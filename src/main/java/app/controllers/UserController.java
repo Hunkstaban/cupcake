@@ -1,9 +1,6 @@
 package app.controllers;
 
-import app.entities.Base;
-import app.entities.Order;
-import app.entities.Topping;
-import app.entities.User;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
@@ -23,7 +20,15 @@ public class UserController {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
         app.get("create", ctx -> createUser(ctx, connectionPool));
+        app.get("renderIndex", ctx -> renderIndex(ctx, connectionPool));
 
+
+    }
+
+    private static void renderIndex(Context ctx, ConnectionPool connectionPool) {
+
+        CupcakeController.baseToppingAttributes(ctx, connectionPool);
+        ctx.render("index.html");
 
     }
 

@@ -1,0 +1,24 @@
+
+#cart-table-container {
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.cart-table {
+
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.cart-table th, td {
+
+    padding: 10px;
+    text-align: center;
+
+
+}
+
