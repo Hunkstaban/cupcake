@@ -18,6 +18,22 @@ public class OrderController {
         //app.post("movetask", ctx -> moveTask(ctx, connectionPool));
         app.post("addToCart", ctx -> addToCart(ctx, connectionPool));
         app.get("goToCart", ctx -> goToCart(ctx, connectionPool));
+        app.post("removeFromCart", ctx -> removeFromCart(ctx, connectionPool));
+    }
+
+    private static void removeFromCart(Context ctx, ConnectionPool connectionPool) {
+
+        int cartIndex = Integer.parseInt(ctx.formParam("cartIndex"));
+
+        try {
+
+                User user = ctx.sessionAttribute("currentUser");
+                user.removeFromCart(cartIndex);
+                goToCart(ctx, connectionPool);
+
+        } catch (Exception e) {
+            System.out.println("Error removing item from cart");
+        }
     }
 
     private static void goToCart(Context ctx, ConnectionPool connectionPool) {
