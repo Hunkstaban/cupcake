@@ -22,17 +22,19 @@
 
     <div id="form">
         <form method="post" id="loginForm">
-            <h1 class="h1" id="loginH1">Log in</h1>
+            <h1 class="h1" id="loginH1">Log ind</h1>
 
             <a href="create.html" class="p opretKonto termsText">Opret konto</a>
 
             <label class="p label" for="email">Email</label>
             <input type="text" class=input id="email" name="email">
 
-            <label class="p label" for="password">Password</label>
+            <label class="p label" for="password">Kodeord</label>
             <input type="password" class=input id="password" name="password">
 
-            <p class="p termsText">Ved at oprette en konto accepterer du vores vilkår og har læst og anerkendt den globale fortrolighedserklæring.</p>
+            <div class="user-not-found" th:if="${loginError}">
+                <p th:text="${loginError}"></p>
+            </div>
 
             <button type="submit" class="defbutton green" id="loginbutton" formaction="login">Log ind</button>
         </form>

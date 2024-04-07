@@ -32,10 +32,10 @@ public class UserMapper {
                 int balance = resultSet.getInt("balance");
 
                 return new User(userId, email, password, roleId, balance);
-            } else throw new DatabaseException("fejl i login. check din syntax");
+            } else throw new DatabaseException("Error getting User from database");
 
         } catch (SQLException e) {
-            throw new DatabaseException("noget gik galt med databasen " + e.getMessage());
+            throw new DatabaseException("DB error: " + e.getMessage());
         }
 
 

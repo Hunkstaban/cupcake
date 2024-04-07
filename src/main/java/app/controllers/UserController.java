@@ -69,8 +69,9 @@ public class UserController {
             }
 
         } catch (DatabaseException e) {
-            ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            String msg = "Forket email eller kodeord. Prøv igen";
+            ctx.attribute("loginError", msg);
+            ctx.render("login.html");
         }
 
     }
