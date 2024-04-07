@@ -94,7 +94,9 @@ public class OrderController {
         } catch (DatabaseException e) {
             String msg = "Utilstrækkelig saldo.";
             ctx.attribute("balanceError", msg);
-            ctx.redirect("goToCart");
+            ctx.attribute("cartList", user.getCartList());
+            ctx.attribute("orderTotalPrice", orderTotalPrice);
+            ctx.render("cart.html");
         }
 
 
