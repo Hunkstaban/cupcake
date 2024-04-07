@@ -76,7 +76,6 @@ public class OrderController {
 
         // Update User balance and check if they have enough money to complete the transaction (using UserMapper)
         int orderTotalPrice = Integer.parseInt(ctx.formParam("orderTotalPrice"));
-
         try {
             UserMapper.updateBalance(user, orderTotalPrice, connectionPool);
             // If no errors in User balance check, create new order

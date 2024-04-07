@@ -23,21 +23,24 @@
         font-family: Inter;
         font-weight: 700;
         font-size: 21px;
-        color: orange;
     }
 
     .h2 {
         font-family: Inter;
         font-weight: 600;
         font-size: 18px;
-        color: orange;
     }
 
     .p {
         font-family: Inter;
         font-weight: 400;
         font-size: 16px;
-        color: orange;
+    }
+
+    #select {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
     }
 }
 

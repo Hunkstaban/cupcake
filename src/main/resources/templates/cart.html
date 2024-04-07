@@ -97,7 +97,10 @@
             <form th:action="@{renderIndex}" method="get">
                 <button class="defbutton green">Køb mere</button>
             </form>
+        </div>
 
+        <div class="insufficient-funds" th:if="${balanceError}">
+            <p th:text="${balanceError}"></p>
         </div>
     </div>
 
