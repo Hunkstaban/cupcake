@@ -56,6 +56,10 @@ public class User {
         return balance;
     }
 
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
     public List<OrderDetail> getCartList() {
         return cartList;
     }

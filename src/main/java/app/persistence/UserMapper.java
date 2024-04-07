@@ -77,6 +77,7 @@ public class UserMapper {
             throw new DatabaseException("Insufficient funds to complete transaction");
         } else {
             int newBalance = currentBalance - orderTotalPrice;
+            user.setBalance(newBalance);
             try (
                     Connection connection = connectionPool.getConnection();
                     PreparedStatement ps = connection.prepareStatement(sql)
