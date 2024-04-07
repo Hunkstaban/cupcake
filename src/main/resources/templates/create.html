@@ -1,44 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/loginStyle.css">
-
+    <title>Create</title>
+    <link rel="stylesheet" href="../../public/css/loginStyle.css" th:href="@{/css/loginStyle.css}">
+    <link rel="stylesheet" href="../../public/css/styles.css" th:href="@{/css/styles.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 </head>
 <body>
-
 <header>
-
 </header>
-
 <div id="page">
-
     <div id="form">
         <form id="loginForm">
             <h1 class="h1" id="loginH1">Opret konto</h1>
-
-            <a href="login.html" class="p opretKonto termsText">Log ind</a>
-
+            <a th:href="@{/loginPage}" class="p opretKonto termsText">Log ind</a>
             <label class="p label" for="email">Email</label>
             <input type="text" class=input id="email" name="email">
-
             <label class="p label" for="password">Kodeord</label>
             <input type="password" class=input id="password" name="password">
-
             <button type="submit" class="defbutton green" id="loginbutton" formaction="opret">Opret</button>
         </form>
     </div>
-
-
 </div>
-
-
 </body>
 </html>

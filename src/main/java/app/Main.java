@@ -1,6 +1,7 @@
 package app;
 
 import app.config.ThymeleafConfig;
+import app.controllers.LoginController;
 import app.controllers.OrderController;
 import app.controllers.UserController;
 import app.persistence.ConnectionPool;
@@ -26,6 +27,7 @@ public class Main {
         // Routing
         app.get("/", ctx ->  ctx.render("login"));
 
+        LoginController.addRoute(app, connectionPool);
         UserController.addRoute(app, connectionPool);
         OrderController.addRoutes(app, connectionPool);
     }

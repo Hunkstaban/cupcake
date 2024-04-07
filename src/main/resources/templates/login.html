@@ -1,48 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="../../public/css/loginStyle.css" th:href="@{/css/loginStyle.css}">
     <link rel="stylesheet" href="../../public/css/styles.css" th:href="@{/css/styles.css}">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 </head>
 <body>
-
 <header>
-
 </header>
-
 <div id="page">
-
     <div id="form">
         <form method="post" id="loginForm">
             <h1 class="h1" id="loginH1">Log ind</h1>
-
-            <a href="create.html" class="p opretKonto termsText">Opret konto</a>
-
+            <a th:href="@{/createPage}" class="p opretKonto termsText">Opret konto</a>
             <label class="p label" for="email">Email</label>
             <input type="text" class=input id="email" name="email">
-
             <label class="p label" for="password">Kodeord</label>
             <input type="password" class=input id="password" name="password">
-
             <div class="user-not-found" th:if="${loginError}">
                 <p th:text="${loginError}"></p>
             </div>
-
             <button type="submit" class="defbutton green" id="loginbutton" formaction="login">Log ind</button>
         </form>
     </div>
-
-
 </div>
-
-
 </body>
 </html>
