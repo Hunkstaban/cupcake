@@ -11,6 +11,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}">
     <link rel="stylesheet" href="../public/css/indexStyle.css" th:href="@{/css/indexStyle.css}">
+    <!--    <link resource="image" href="../public/images/cart.png" th:href="@{../public/images/cart.png}">-->
 
 
     <title>Index</title>
@@ -41,7 +42,8 @@
                     <a href="http://localhost:7070/goToCart?">
                         <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
 
-                    </a>
+                            <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40">
+                        </a>
                 </div>
                 </p>
 
@@ -98,18 +100,22 @@
 
             <div class="putincart">
 
+            <div class="lægikurv">
                 <button type="submit" formaction="addToCart" class="defbutton green">
                     Læg i kurv
                 </button>
-                </form>
-                <form method="get">
-                    <button formaction="goToCart" class="defbutton green">
-                        Gå til kurv
-                    </button>
-                </form>
             </div>
-    </div>
+        </form>
 
+        <div class="lægikurv">
+            <form method="get">
+                <button formaction="goToCart" class="defbutton green">
+                    Gå til kurv
+                </button>
+            </form>
+        </div>
+
+    </div>
 </div>
 
 </body>

@@ -60,7 +60,7 @@ public class OrderDetailMapper {
     }
 
     public static void insertOrderDetails(User user, int orderID, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "INSERT INTO order_details (base_id, toppping_id, amount, total_price, order_id) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO order_details (base_id, topping_id, amount, total_price, order_id) VALUES (?,?,?,?,?)";
         List<OrderDetail> userCart = user.getCartList();
 
         for (OrderDetail orderDetail : userCart) {

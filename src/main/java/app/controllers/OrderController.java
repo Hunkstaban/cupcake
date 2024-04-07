@@ -20,6 +20,7 @@ public class OrderController {
         app.post("addToCart", ctx -> addToCart(ctx, connectionPool));
         app.get("goToCart", ctx -> goToCart(ctx, connectionPool));
         app.post("removeFromCart", ctx -> removeFromCart(ctx, connectionPool));
+        app.post("newOrder", ctx -> newOrder(ctx, connectionPool));
     }
 
     private static void removeFromCart(Context ctx, ConnectionPool connectionPool) {
@@ -28,9 +29,9 @@ public class OrderController {
 
         try {
 
-                User user = ctx.sessionAttribute("currentUser");
-                user.removeFromCart(cartIndex);
-                ctx.redirect("goToCart");
+            User user = ctx.sessionAttribute("currentUser");
+            user.removeFromCart(cartIndex);
+            ctx.redirect("goToCart");
 
         } catch (Exception e) {
             System.out.println("Error removing item from cart");
@@ -74,24 +75,27 @@ public class OrderController {
         User user = ctx.sessionAttribute("currentUser");
 
         // Update User balance and check if they have enough money to complete the transaction (using UserMapper)
-        int orderTotalPrice = ctx.attribute("orderTotalPrice");
+        int orderTotalPrice = Integer.parseInt(ctx.formParam("orderTotalPrice"));
         try {
             UserMapper.updateBalance(user, orderTotalPrice, connectionPool);
+            // If no errors in User balance check, create new order
+            try {
+                int orderID = OrderDetailMapper.newOrder(user, connectionPool);
+                OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
+
+                // If order completed, empty currentUser's cart and refresh the page, sending orderID as an attribute
+                user.emptyCart();
+                ctx.attribute("orderID", orderID);
+                ctx.render("cart.html");
+            } catch (DatabaseException e) {
+                throw new RuntimeException(e);
+            }
         } catch (DatabaseException e) {
-            throw new RuntimeException(e);
-        }
-
-        // If no errors in User balance check, create new order
-        try {
-            int orderID = OrderDetailMapper.newOrder(user, connectionPool);
-            OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
-
-            // If order completed, empty currentUser's cart and refresh the page, sending orderID as an attribute
-            user.emptyCart();
-            ctx.attribute("orderID", orderID);
+            String msg = "Utilstrækkelig saldo.";
+            ctx.attribute("balanceError", msg);
+            ctx.attribute("cartList", user.getCartList());
+            ctx.attribute("orderTotalPrice", orderTotalPrice);
             ctx.render("cart.html");
-        } catch (DatabaseException e) {
-            throw new RuntimeException(e);
         }
     }
 
