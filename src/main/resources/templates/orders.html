@@ -15,13 +15,89 @@
 <body>
 
 <header>
+    <div class="headers">
+        <div class="headersplacement">
+            <!--  TODO thymelead link til mail,saldo og cart ikon  -->
 
+            <div class="headersleftside">
+                <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span></p>
+            </div>
+
+            <!--  TODO  indsæt billed her    -->
+
+            <div class="headersrightside">
+                <p class="headeremail p">
+                    <a href="login.html" th:text="${session.currentUser.email}">
+                    </a>
+                </p>
+                <p class="headercart p">
+                    <a href="cart.html">
+                        <img src="../images/cart.png" height="40" width="40"/>
+                    </a>
+                </p>
+
+            </div>
+
+
+        </div>
+    </div>
 </header>
 
-<div id="page">
-    <div id="select">
 
+<div id="page">
+
+    <div class="centerpage">
+
+        <div class="pagetext">
+            <h1 class="h1">
+                Indkøbskurv
+            </h1>
+            <div id="cart-table-container">
+                <table class="cart-table">
+                    <thead>
+                    <tr>
+                        <th>Order id</th>
+                        <th>Email</th>
+                        <th>Top</th>
+                        <th>Bund</th>
+                        <th>Antal</th>
+                        <th>Pris</th>
+                        <th>Dato</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="cart, index : ${cartList}">
+                        <td th:text="${cart.baseName}"></td>
+                        <td th:text="${cart.toppingName}"></td>
+                        <td th:text="${cart.amount}"></td>
+                        <td th:text="${cart.totalPrice} + ' kr.'"></td>
+                        <td>
+                            <form th:action="@{/removeFromCart}" method="post">
+                                <input type="hidden" name="cartIndex" th:value="${index.index}">
+                                <button class="remove-item-button" type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="lægikurv">
+            <p class="totalCartPrice" th:text="'Total pris ' + ${orderTotalPrice} + ' kr.'"></p>
+            <button class="defbutton green">
+                Bestil
+            </button>
+            <form th:action="@{renderIndex}" method="get">
+                <button class="defbutton green">Køb mere</button>
+            </form>
+
+        </div>
     </div>
+
 </div>
 
 </body>
