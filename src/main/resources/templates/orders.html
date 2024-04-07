@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Orders</title>
-    <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/orderStyle.css">
+    <link rel="stylesheet" href="../../public/css/orderStyle.css" th:href="@{/css/orderStyle.css}">
+    <link rel="stylesheet" href="../../public/css/styles.css" th:href="@{/css/styles.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,13 +16,58 @@
 <body>
 
 <header>
+    <div class="headers">
+        <div class="headersplacement">
+            <!--  TODO thymelead link til mail,saldo og cart ikon  -->
 
+            <!--  TODO  indsæt billed her    -->
+
+            <div class="headersrightside">
+                <p class="headeremail p">
+                    <a href="login.html" th:text="${session.currentUser.email}">
+                    </a>
+                </p>
+                <p class="headercart p">
+                    <a href="cart.html">
+                        <img src="../images/cart.png" height="40" width="40"/>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
 </header>
 
-<div id="page">
-    <div id="select">
 
+<div id="page">
+
+    <div class="centerpage">
+
+        <h1 class="h1">
+            Seneste ordre:
+        </h1>
+        <table id="orders">
+            <tr>
+                <th>Ordre nr</th>
+                <th>Email</th>
+                <th>Top</th>
+                <th>Bund</th>
+                <th>Antal</th>
+                <th>Pris</th>
+                <th>Dato</th>
+            </tr>
+
+            <tr th:each="order : ${orderList}">
+                <td th:text="${order.orderID}"></td>
+                <td th:text="${order.email}"></td>
+                <td th:text="${order.baseName}"></td>
+                <td th:text="${order.toppingName}"></td>
+                <td th:text="${order.amount}"></td>
+                <td th:text="${order.totalPrice}"></td>
+                <td th:text="${order.date}"></td>
+            </tr>
+        </table>
     </div>
+
 </div>
 
 </body>

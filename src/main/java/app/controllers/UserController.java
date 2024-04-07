@@ -9,6 +9,7 @@ import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static app.persistence.UserMapper.login;
@@ -83,7 +84,8 @@ public class UserController {
     private static void adminLogin(Context ctx, ConnectionPool connectionPool, User user) {
         ctx.sessionAttribute("currentUser", user);
         // will need attribute from not yet created viewALlOrders method (OrderController/Mapper)
-        ctx.attribute("orderlist", OrderMapper.viewAllOrders(user, connectionPool));
+        List<Order> orderList =  OrderMapper.viewAllOrders(connectionPool);
+        ctx.attribute("orderList", orderList);
         ctx.render("orders.html");
     }
 

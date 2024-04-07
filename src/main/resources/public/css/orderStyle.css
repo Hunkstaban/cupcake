@@ -6,3 +6,19 @@
     justify-content: center;
 }
 
+#orders td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#orders tr:nth-child(even){background-color: #f2f2f2;}
+
+#orders tr:hover {background-color: #ddd;}
+
+#orders th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
