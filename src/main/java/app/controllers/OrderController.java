@@ -97,8 +97,6 @@ public class OrderController {
             ctx.attribute("orderTotalPrice", orderTotalPrice);
             ctx.render("cart.html");
         }
-
-
     }
 
 
