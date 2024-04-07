@@ -42,7 +42,8 @@ public class UserController {
             User newUser = UserMapper.createUser(email,password,connectionPool);
             userLogin(ctx, connectionPool, newUser);
         } catch (DatabaseException e) {
-            ctx.attribute("message", e.getMessage());
+            String msg = "Bruger med denne email eksisterer allerede.";
+            ctx.attribute("alreadyExist", msg);
             ctx.render("create.html");
         }
     }

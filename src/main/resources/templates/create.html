@@ -22,7 +22,12 @@
             <input type="text" class=input id="email" name="email">
             <label class="p label" for="password">Kodeord</label>
             <input type="password" class=input id="password" name="password">
-            <button type="submit" class="defbutton green" id="loginbutton" formaction="opret">Opret</button>
+
+            <div class="user-not-found" th:if="${alreadyExist}">
+                <p th:text="${alreadyExist}"></p>
+            </div>
+
+            <button type="submit" class="defbutton green" id="loginbutton" formaction="create">Opret</button>
         </form>
     </div>
 </div>

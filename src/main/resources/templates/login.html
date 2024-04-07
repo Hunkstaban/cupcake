@@ -28,6 +28,11 @@
             <div class="user-not-found" th:if="${loginError}">
                 <p th:text="${loginError}"></p>
             </div>
+
+            <div class="user-not-found" th:if="${loginError}">
+                <p th:text="${loginError}"></p>
+            </div>
+
             <button type="submit" class="defbutton green" id="loginbutton" formaction="login">Log ind</button>
         </form>
     </div>
