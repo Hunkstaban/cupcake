@@ -12,9 +12,9 @@ import java.util.List;
 
 public class OrderMapper {
 
-    public static List<Order> viewAllOrders(User user, ConnectionPool connectionPool) {
+    public static List<Order> viewAllOrders(ConnectionPool connectionPool) {
         String sql = "SELECT * FROM public.view_all_orders";
-        List<Order> orders = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -30,11 +30,34 @@ public class OrderMapper {
                 int totalPrice = rs.getInt("total_price");
                 String date = rs.getString("date");
 
-                orders.add(new Order(orderID, email, baseName, toppingName, amount, totalPrice, date));
+                orderList.add(new Order(orderID, email, baseName, toppingName, amount, totalPrice, date));
             }
-            return orders;
+            return orderList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<Order> viewAllOrdersTest(ConnectionPool connectionPool) {
+        String sql = "SELECT * FROM orders";
+        List<Order> orderList = new ArrayList<>();
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+        ) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int orderID = rs.getInt("order_id");
+                int userID = rs.getInt("user_id");
+                String date = rs.getString("date");
+
+                orderList.add(new Order(orderID, userID, date));
+            }
+            return orderList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

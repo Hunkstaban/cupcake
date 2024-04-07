@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Orders</title>
-    <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/orderStyle.css">
+    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../public/css/orderStyle.css" th:href="@{/css/orderStyles.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,10 +36,7 @@
                         <img src="../images/cart.png" height="40" width="40"/>
                     </a>
                 </p>
-
             </div>
-
-
         </div>
     </div>
 </header>
@@ -56,7 +54,7 @@
                 <table class="cart-table">
                     <thead>
                     <tr>
-                        <th>Order id</th>
+                        <th>Ordre nr</th>
                         <th>Email</th>
                         <th>Top</th>
                         <th>Bund</th>
@@ -67,34 +65,24 @@
                     </thead>
 
                     <tbody>
-
-                    <tr th:each="cart, index : ${cartList}">
-                        <td th:text="${cart.baseName}"></td>
-                        <td th:text="${cart.toppingName}"></td>
-                        <td th:text="${cart.amount}"></td>
-                        <td th:text="${cart.totalPrice} + ' kr.'"></td>
-                        <td>
-                            <form th:action="@{/removeFromCart}" method="post">
-                                <input type="hidden" name="cartIndex" th:value="${index.index}">
-                                <button class="remove-item-button" type="submit">Remove</button>
-                            </form>
-                        </td>
+                    <tr th:each="order : ${orderList}">
+                        <td th:text="${order.orderID}"></td>
+                        <td th:text="${order.email}"></td>
+                        <td th:text="${order.baseName}"></td>
+                        <td th:text="${order.toppingName}"></td>
+                        <td th:text="${order.amount}"></td>
+                        <td th:text="${order.totalPrice}"></td>
+                        <td th:text="${order.date}"></td>
+<!--                        <td>-->
+<!--                            <form th:action="@{/removeFromCart}" method="post">-->
+<!--                                <input type="hidden" name="cartIndex" th:value="${index.index}">-->
+<!--                                <button class="remove-item-button" type="submit">Remove</button>-->
+<!--                            </form>-->
+<!--                        </td>-->
                     </tr>
                     </tbody>
-
                 </table>
             </div>
-        </div>
-
-        <div class="lægikurv">
-            <p class="totalCartPrice" th:text="'Total pris ' + ${orderTotalPrice} + ' kr.'"></p>
-            <button class="defbutton green">
-                Bestil
-            </button>
-            <form th:action="@{renderIndex}" method="get">
-                <button class="defbutton green">Køb mere</button>
-            </form>
-
         </div>
     </div>
 
