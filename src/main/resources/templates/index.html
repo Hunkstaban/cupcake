@@ -32,14 +32,14 @@
 
             <div class="headersrightside">
                 <p class="headeremail p">
-                    <a class="aref" href="login.html" th:text="${session.currentUser.email}">
+                    <a class="aref" href="http://localhost:7070/" th:text="${session.currentUser.email}">
                     </a>
                 </p>
 
                 <div class="cart-img-container">
                 <p class="headercart p">
-                    <a href="cart.html">
-                        <img src="../images/cart.png" height="40" width="40"/>
+                    <a href="http://localhost:7070/goToCart?">
+                        <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
 
                     </a>
                 </div>
