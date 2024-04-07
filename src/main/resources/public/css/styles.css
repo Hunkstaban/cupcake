@@ -76,3 +76,17 @@
     cursor: pointer;
     transform: scale(1.1);
 }
+
+.logoutbutton{
+    display: block;
+    margin-bottom: 35px;
+    color: black;
+    border: none;
+    background-color: white;
+    margin: 20px;
+}
+
+.logoutbutton:hover {
+    cursor: pointer;
+    color: #4c76e0;
+}

@@ -29,9 +29,13 @@
             </div>
 
 
-
             <div class="headersrightside">
                 <p class="headeremail p" th:text="${session.currentUser.email}"/>
+
+                <form method="get">
+                    <button class="logoutbutton p" th:formaction="logout">Logout</button>
+                </form>
+
                 <a href="http://localhost:7070/goToCart?">
                     <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
                 </a>
@@ -85,7 +89,7 @@
             <p class="totalCartPrice" th:text="'Total pris ' + ${orderTotalPrice} + ' kr.'"></p>
             <form method="post">
                 <input name="orderTotalPrice" type="hidden" th:value="${orderTotalPrice}">
-            <button class="defbutton green" type="submit" formaction="newOrder">Bestil</button>
+                <button class="defbutton green" type="submit" formaction="newOrder">Bestil</button>
             </form>
             <form th:action="@{renderIndex}" method="get">
                 <button class="defbutton green">Køb mere</button>
