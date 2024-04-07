@@ -4,6 +4,7 @@ import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
+import app.persistence.OrderMapper;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -82,6 +83,7 @@ public class UserController {
     private static void adminLogin(Context ctx, ConnectionPool connectionPool, User user) {
         ctx.sessionAttribute("currentUser", user);
         // will need attribute from not yet created viewALlOrders method (OrderController/Mapper)
+        ctx.attribute("orderlist", OrderMapper.viewAllOrders(user, connectionPool));
         ctx.render("orders.html");
     }
 
