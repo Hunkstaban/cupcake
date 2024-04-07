@@ -20,6 +20,7 @@ public class OrderController {
         app.post("addToCart", ctx -> addToCart(ctx, connectionPool));
         app.get("goToCart", ctx -> goToCart(ctx, connectionPool));
         app.post("removeFromCart", ctx -> removeFromCart(ctx, connectionPool));
+        app.post("newOrder", ctx -> newOrder(ctx, connectionPool));
     }
 
     private static void removeFromCart(Context ctx, ConnectionPool connectionPool) {
@@ -28,9 +29,9 @@ public class OrderController {
 
         try {
 
-                User user = ctx.sessionAttribute("currentUser");
-                user.removeFromCart(cartIndex);
-                ctx.redirect("goToCart");
+            User user = ctx.sessionAttribute("currentUser");
+            user.removeFromCart(cartIndex);
+            ctx.redirect("goToCart");
 
         } catch (Exception e) {
             System.out.println("Error removing item from cart");
@@ -74,7 +75,8 @@ public class OrderController {
         User user = ctx.sessionAttribute("currentUser");
 
         // Update User balance and check if they have enough money to complete the transaction (using UserMapper)
-        int orderTotalPrice = ctx.attribute("orderTotalPrice");
+        int orderTotalPrice = Integer.parseInt(ctx.formParam("orderTotalPrice"));
+
         try {
             UserMapper.updateBalance(user, orderTotalPrice, connectionPool);
         } catch (DatabaseException e) {
@@ -93,7 +95,6 @@ public class OrderController {
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 
