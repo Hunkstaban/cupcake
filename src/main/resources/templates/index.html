@@ -41,8 +41,6 @@
                 <p class="headercart p">
                     <a href="http://localhost:7070/goToCart?">
                         <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
-
-                            <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40">
                         </a>
                 </div>
                 </p>
@@ -99,15 +97,13 @@
             </div>
 
             <div class="putincart">
-
-            <div class="lægikurv">
                 <button type="submit" formaction="addToCart" class="defbutton green">
                     Læg i kurv
                 </button>
             </div>
         </form>
 
-        <div class="lægikurv">
+        <div class="putincart">
             <form method="get">
                 <button formaction="goToCart" class="defbutton green">
                     Gå til kurv
