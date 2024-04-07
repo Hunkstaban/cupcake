@@ -23,11 +23,9 @@
     <div class="headers">
         <div class="headersplacement">
 
-
             <div class="headersleftside">
                 <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</p>
             </div>
-
 
             <div class="headersrightside">
                 <p class="headeremail p" th:text="${session.currentUser.email}"/>
@@ -40,20 +38,20 @@
                     <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
                 </a>
             </div>
+
         </div>
     </div>
 </header>
 
 
 <div id="page">
-
     <div class="centerpage">
-
         <div class="pagetext">
             <h1 class="h1">
                 Indkøbskurv
             </h1>
             <div id="cart-table-container">
+
                 <table class="cart-table">
                     <thead>
                     <tr>
@@ -66,7 +64,6 @@
                     </thead>
 
                     <tbody>
-
                     <tr th:each="cart, index : ${cartList}">
                         <td th:text="${cart.baseName}"></td>
                         <td th:text="${cart.toppingName}"></td>
@@ -80,8 +77,8 @@
                         </td>
                     </tr>
                     </tbody>
-
                 </table>
+
             </div>
         </div>
 
