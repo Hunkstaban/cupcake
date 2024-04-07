@@ -23,19 +23,21 @@
 <header>
     <div class="headers">
         <div class="headersplacement">
-            <!--  TODO thymelead link til mail,saldo og cart ikon  -->
+
 
             <div class="headersleftside">
                 <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</p>
             </div>
 
-            <!--  TODO  indsæt billed her    -->
+            <!--  TODO indsæt cupcake billed her    -->
 
             <div class="headersrightside">
-                <p class="headeremail p">
-                    <a class="aref" href="http://localhost:7070/" th:text="${session.currentUser.email}">
-                    </a>
-                </p>
+                <p class="headeremail p" th:text="${session.currentUser.email}"/>
+
+
+                <form method="get">
+                 <button class="logoutbutton p" th:formaction="logout">Logout</button>
+                    </form>
 
                 <div class="cart-img-container">
                 <p class="headercart p">
