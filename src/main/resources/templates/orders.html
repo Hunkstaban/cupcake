@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Orders</title>
-    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" href="../public/css/orderStyle.css" th:href="@{/css/orderStyles.css}">
+    <link rel="stylesheet" href="../../public/css/orderStyle.css" th:href="@{/css/orderStyle.css}">
+    <link rel="stylesheet" href="../../public/css/styles.css" th:href="@{/css/styles.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +19,6 @@
     <div class="headers">
         <div class="headersplacement">
             <!--  TODO thymelead link til mail,saldo og cart ikon  -->
-
-            <div class="headersleftside">
-                <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span></p>
-            </div>
 
             <!--  TODO  indsæt billed her    -->
 
@@ -46,44 +42,30 @@
 
     <div class="centerpage">
 
-        <div class="pagetext">
-            <h1 class="h1">
-                Indkøbskurv
-            </h1>
-            <div id="cart-table-container">
-                <table class="cart-table">
-                    <thead>
-                    <tr>
-                        <th>Ordre nr</th>
-                        <th>Email</th>
-                        <th>Top</th>
-                        <th>Bund</th>
-                        <th>Antal</th>
-                        <th>Pris</th>
-                        <th>Dato</th>
-                    </tr>
-                    </thead>
+        <h1 class="h1">
+            Seneste ordre:
+        </h1>
+        <table id="orders">
+            <tr>
+                <th>Ordre nr</th>
+                <th>Email</th>
+                <th>Top</th>
+                <th>Bund</th>
+                <th>Antal</th>
+                <th>Pris</th>
+                <th>Dato</th>
+            </tr>
 
-                    <tbody>
-                    <tr th:each="order : ${orderList}">
-                        <td th:text="${order.orderID}"></td>
-                        <td th:text="${order.email}"></td>
-                        <td th:text="${order.baseName}"></td>
-                        <td th:text="${order.toppingName}"></td>
-                        <td th:text="${order.amount}"></td>
-                        <td th:text="${order.totalPrice}"></td>
-                        <td th:text="${order.date}"></td>
-<!--                        <td>-->
-<!--                            <form th:action="@{/removeFromCart}" method="post">-->
-<!--                                <input type="hidden" name="cartIndex" th:value="${index.index}">-->
-<!--                                <button class="remove-item-button" type="submit">Remove</button>-->
-<!--                            </form>-->
-<!--                        </td>-->
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <tr th:each="order : ${orderList}">
+                <td th:text="${order.orderID}"></td>
+                <td th:text="${order.email}"></td>
+                <td th:text="${order.baseName}"></td>
+                <td th:text="${order.toppingName}"></td>
+                <td th:text="${order.amount}"></td>
+                <td th:text="${order.totalPrice}"></td>
+                <td th:text="${order.date}"></td>
+            </tr>
+        </table>
     </div>
 
 </div>

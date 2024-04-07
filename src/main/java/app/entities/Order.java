@@ -22,6 +22,38 @@ public class Order {
         this.date = date;
     }
 
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getBaseName() {
+        return baseName;
+    }
+
+    public String getToppingName() {
+        return toppingName;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     public Order(int orderID, int userID, String date) {
         this.orderID = orderID;
         this.userID = userID;
