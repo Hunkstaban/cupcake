@@ -29,8 +29,9 @@ public class UserMapper {
             if (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
                 int roleId = resultSet.getInt("role_id");
+                int balance = resultSet.getInt("balance");
 
-                return new User(userId, email, password, roleId);
+                return new User(userId, email, password, roleId, balance);
             } else throw new DatabaseException("fejl i login. check din syntax");
 
         } catch (SQLException e) {
@@ -41,7 +42,7 @@ public class UserMapper {
     }
 
 
-    public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+    public static User createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
 
         String sql = "INSERT INTO users (email,password) VALUES(?,?)";
 
@@ -52,13 +53,9 @@ public class UserMapper {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
 
-            int rowsUpdated = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
-            // if our rowsUpdated are "not equal to 1" throw Exception.
-            // because when we create a new user we should get 1 new row
-            if (rowsUpdated != 1) {
-                throw new DatabaseException("Fejl i oprettelse af bruger");
-            }
+            return login(email, password, connectionPool);
 
         } catch (SQLException e) {
 
@@ -72,5 +69,38 @@ public class UserMapper {
 
     }
 
+    public static void updateBalance(User user, int orderTotalPrice, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE users SET balance = ? WHERE user_id = ?";
+
+        int currentBalance = user.getBalance();
+        if (currentBalance < orderTotalPrice) {
+            throw new DatabaseException("Insufficient funds to complete transaction");
+        } else {
+            int newBalance = currentBalance - orderTotalPrice;
+            try (
+                    Connection connection = connectionPool.getConnection();
+                    PreparedStatement ps = connection.prepareStatement(sql)
+            ) {
+                ps.setInt(1, newBalance);
+                ps.setInt(2, user.getUserID());
+
+                int rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected != 1) {
+                    throw new DatabaseException("Error updating balance for user " + user.getUserID());
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+
+
+
+
+    }
 
 }// ---------------------- end class ------------------------------------

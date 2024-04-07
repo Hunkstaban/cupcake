@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/indexStyle.css">
+    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../public/css/indexStyle.css" th:href="@{/css/indexStyle.css}">
 
 
     <title>Index</title>
@@ -23,22 +25,24 @@
             <!--  TODO thymelead link til mail,saldo og cart ikon  -->
 
             <div class="headersleftside">
-                <p class="headersaldo p"> Saldo: 1.000kr</p>
+                <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span></p>
             </div>
 
             <!--  TODO  indsæt billed her    -->
 
             <div class="headersrightside">
                 <p class="headeremail p">
-                    <a class="aref" href="login.html">
-                        email@email.dk
+                    <a class="aref" href="login.html" th:text="${session.currentUser.email}">
                     </a>
                 </p>
 
+                <div class="cart-img-container">
                 <p class="headercart p">
                     <a href="cart.html">
                         <img src="../images/cart.png" height="40" width="40"/>
+
                     </a>
+                </div>
                 </p>
 
             </div>
@@ -63,37 +67,47 @@
             </h2>
 
         </div>
+        <form method="post">
+            <div id="select">
+                <select name="base" id="bund" class="defbutton dropdownmarginright dropdownPadding" required>
+                    <option value="">Vælg bund</option>
+                    <option th:each="base : ${baseList}" th:value="${base.baseID}"
+                            th:text="${base.baseName + ' - ' + base.basePrice + ' kr.'}"></option>
+                </select>
 
-        <div id="select">
-            <select name="bund" id="bund" class="defbutton dropdownmarginright dropdownPadding">
-                <option value="bund">Bund</option>
-            </select>
+                <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding" required>
+                    <option value="">Vælg top</option>
+                    <option th:each="topping : ${toppingList}" th:value="${topping.toppingID}"
+                            th:text="${topping.toppingName + ' - ' + topping.toppingPrice + ' kr.'}"></option>
+                </select>
 
-            <select name="top" id="top" class="defbutton dropdownmarginright dropdownPadding">
-                <option value="top">Top</option>
-            </select>
+                <select name="amount" id="antal" class="defbutton dropdownPadding" required>
+                    <option value="">Antal</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
 
-            <select name="antal" id="antal" class="defbutton dropdownPadding">
-                <option>Antal</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </div>
+            <div class="lægikurv">
 
-        <div class="lægikurv">
-            <button class="defbutton green">
-                Læg i kurv
-            </button>
-        </div>
-
+                <button type="submit" formaction="addToCart" class="defbutton green">
+                    Læg i kurv
+                </button>
+                </form>
+                <form method="get">
+                    <button formaction="goToCart" class="defbutton green">
+                        Gå til kurv
+                    </button>
+                </form>
+            </div>
     </div>
 
 </div>

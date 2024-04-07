@@ -9,13 +9,15 @@ public class User {
     private String email;
     private String password;
     private int roleID;
+    private int balance;
     private List<OrderDetail> cartList = new ArrayList<>();
 
-    public User(int userID, String email, String password, int roleID) {
+    public User(int userID, String email, String password, int roleID, int balance) {
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.roleID = roleID;
+        this.balance = balance;
     }
 
     public User(int userID) {
@@ -50,6 +52,10 @@ public class User {
         return roleID;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
     public List<OrderDetail> getCartList() {
         return cartList;
     }
@@ -58,4 +64,13 @@ public class User {
         cartList.add(new OrderDetail(baseID, toppingID, baseName, toppingName, amount, totalPrice));
     }
 
+    public void removeFromCart(int index) {
+
+        cartList.remove(index);
+    }
+
+
+    public void emptyCart() {
+        cartList.clear();
+    }
 }

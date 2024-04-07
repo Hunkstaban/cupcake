@@ -1,7 +1,6 @@
 package app.controllers;
 
-import app.entities.Order;
-import app.entities.User;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
@@ -21,7 +20,15 @@ public class UserController {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
         app.get("create", ctx -> createUser(ctx, connectionPool));
+        app.get("renderIndex", ctx -> renderIndex(ctx, connectionPool));
 
+
+    }
+
+    private static void renderIndex(Context ctx, ConnectionPool connectionPool) {
+
+        CupcakeController.baseToppingAttributes(ctx, connectionPool);
+        ctx.render("index.html");
 
     }
 
@@ -30,21 +37,20 @@ public class UserController {
         String password = ctx.formParam("password");
 
         try {
-            UserMapper.createUser(email,password,connectionPool);
-            // TODO Kan man ikke bare kalde "login" methoden?
-            User user = UserMapper.login(email,password,connectionPool);
-            ctx.sessionAttribute("currentUser", user);
-            ctx.render("index.html");
+            User newUser = UserMapper.createUser(email,password,connectionPool);
+            userLogin(ctx, connectionPool, newUser);
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("create.html");
         }
     }
 
-    // .invalidate = we don't need it anymore. and want to close it.
+
+
+    // .invalidate() = we don't need it anymore. and want to close it.
     private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
-        ctx.render("index.html");
+        ctx.render("login.html");
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {
@@ -53,20 +59,30 @@ public class UserController {
         String password = ctx.formParam("password");
 
         try {
-
-
             User user = UserMapper.login(email, password, connectionPool);
-            ctx.sessionAttribute("currentUser", user);
-            ctx.render("index.html");
-//            List<Order> cartList = CupcakeMapper.getCart() // TODO what we do here + make getcart method ??
-//            ctx.attribute("cart : ", cartList);
-
+            if (user.getRoleID() == 2) {
+                adminLogin(ctx, connectionPool, user);
+            } else {
+                userLogin(ctx, connectionPool, user);
+            }
 
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
+
     }
 
+    private static void userLogin(Context ctx, ConnectionPool connectionPool, User user) {
+        ctx.sessionAttribute("currentUser", user);
+        ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
+        ctx.render("index.html");
+    }
+
+    private static void adminLogin(Context ctx, ConnectionPool connectionPool, User user) {
+        ctx.sessionAttribute("currentUser", user);
+        // will need attribute from not yet created viewALlOrders method (OrderController/Mapper)
+        ctx.render("orders.html");
+    }
 
 }// ---------------------------------  end class ------------------------------------
