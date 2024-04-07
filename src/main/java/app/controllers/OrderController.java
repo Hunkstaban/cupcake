@@ -79,22 +79,24 @@ public class OrderController {
 
         try {
             UserMapper.updateBalance(user, orderTotalPrice, connectionPool);
+            // If no errors in User balance check, create new order
+            try {
+                int orderID = OrderDetailMapper.newOrder(user, connectionPool);
+                OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
+
+                // If order completed, empty currentUser's cart and refresh the page, sending orderID as an attribute
+                user.emptyCart();
+                ctx.attribute("orderID", orderID);
+                ctx.render("cart.html");
+            } catch (DatabaseException e) {
+                throw new RuntimeException(e);
+            }
         } catch (DatabaseException e) {
-            throw new RuntimeException(e);
+            String msg = "Utilstrækkelig saldo.";
+            ctx.attribute("balanceError", msg);
+            ctx.redirect("goToCart");
         }
 
-        // If no errors in User balance check, create new order
-        try {
-            int orderID = OrderDetailMapper.newOrder(user, connectionPool);
-            OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
-
-            // If order completed, empty currentUser's cart and refresh the page, sending orderID as an attribute
-            user.emptyCart();
-            ctx.attribute("orderID", orderID);
-            ctx.render("cart.html");
-        } catch (DatabaseException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 

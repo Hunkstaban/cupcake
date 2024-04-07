@@ -90,9 +90,10 @@
 
         <div class="lægikurv">
             <p class="totalCartPrice" th:text="'Total pris ' + ${orderTotalPrice} + ' kr.'"></p>
-            <button class="defbutton green">
-                Bestil
-            </button>
+            <form method="post">
+                <input name="orderTotalPrice" type="hidden" th:value="${orderTotalPrice}">
+            <button class="defbutton green" type="submit" formaction="newOrder">Bestil</button>
+            </form>
             <form th:action="@{renderIndex}" method="get">
                 <button class="defbutton green">Køb mere</button>
             </form>
