@@ -62,7 +62,7 @@ public class OrderController {
         int amount = Integer.parseInt(ctx.formParam("amount"));
 
         User user = ctx.sessionAttribute("currentUser");
-         String msg = OrderDetailMapper.addToCart(baseID, toppingID, amount, user, connectionPool);
+        String msg = OrderDetailMapper.addToCart(baseID, toppingID, amount, user, connectionPool);
 
         // Amount of cupcakes currently
         int cartQuantity = 0;
