@@ -62,9 +62,15 @@ public class OrderController {
         int amount = Integer.parseInt(ctx.formParam("amount"));
 
         User user = ctx.sessionAttribute("currentUser");
-        OrderDetailMapper.addToCart(baseID, toppingID, amount, user, connectionPool);
+         String msg = OrderDetailMapper.addToCart(baseID, toppingID, amount, user, connectionPool);
 
+        // Amount of cupcakes currently
+        int cartQuantity = 0;
+        for (int i = 0; i < user.getCartList().size(); i++) {
+            cartQuantity++;
+        }
 
+        ctx.attribute("cartSuccess", msg);
         ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
         ctx.render("index.html");
 
@@ -83,15 +89,17 @@ public class OrderController {
                 int orderID = OrderDetailMapper.newOrder(user, connectionPool);
                 OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
 
-                // If order completed, empty currentUser's cart and refresh the page, sending orderID as an attribute
+                // If order completed, empty currentUser's cart and refresh the page, sending a order completed attribute
                 user.emptyCart();
-                ctx.attribute("orderID", orderID);
+                String msg = "Tak for din bestilling!\n Din ordre er registreret med ordre nr.: " + orderID;
+                ctx.attribute("orderCompleted", msg);
                 ctx.render("cart.html");
             } catch (DatabaseException e) {
                 throw new RuntimeException(e);
             }
         } catch (DatabaseException e) {
-            String msg = "Utilstrækkelig saldo.";
+            String msg = "Din saldo dækker desværre ikke denne bestilling."
+                        + "Fjern noget fra din ordre, eller kontakt en admin.";
             ctx.attribute("balanceError", msg);
             ctx.attribute("cartList", user.getCartList());
             ctx.attribute("orderTotalPrice", orderTotalPrice);

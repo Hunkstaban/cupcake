@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderDetailMapper {
 
 
-    public static void addToCart(int baseID, int toppingID, int amount, User user, ConnectionPool connectionPool) {
+    public static String addToCart(int baseID, int toppingID, int amount, User user, ConnectionPool connectionPool) {
 
         try {
             Base base = CupcakeMapper.getBaseByID(baseID, connectionPool);
@@ -23,6 +23,8 @@ public class OrderDetailMapper {
 
             user.addToCart(baseID, toppingID, baseName, toppingName, amount, totalPrice);
 
+            String msg = "" + amount + " stk. " + baseName + " " + toppingName + " tilføjet til kurven!";
+            return msg;
 
         } catch (DatabaseException e) {
             throw new RuntimeException(e);

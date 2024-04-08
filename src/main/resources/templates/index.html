@@ -97,6 +97,10 @@
                 </select>
             </div>
 
+            <div class="cart-success p" th:if="${cartSuccess}">
+                <p th:text="${cartSuccess}"></p>
+            </div>
+
             <div class="putincart">
                 <button type="submit" formaction="addToCart" class="defbutton green">
                     Læg i kurv
