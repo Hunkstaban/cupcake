@@ -5,8 +5,7 @@
 .putincart {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
-
+    /*margin-top: 20px;*/
 }
 
 #page {
@@ -66,20 +65,40 @@
     display: flex;
     justify-content: space-between;
     width: 65%;
+    align-items: center;
+    margin-top: -20px;
+
     /*background-color: chocolate;*/
 }
 
+.headersaldo {
+
+    line-height: 1;
+    /*background-color: #8DFF92;*/
+}
+
 .headersleftside {
-    /*display: flex;*/
+    display: flex;
     justify-content: flex-start;
+    margin-right: auto;
+    align-items: center;
+    margin-top: -20px;
+
 
 }
 
 .headersrightside {
-    /*display: flex;*/
     display: flex;
     gap: 50px;
+    margin-left: auto;
 
+}
+
+.headeremail,
+.headercart,
+.logoutbutton,
+.headersaldo {
+    margin-top: -20px;
 
 }
 
