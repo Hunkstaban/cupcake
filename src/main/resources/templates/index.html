@@ -36,13 +36,13 @@
 
 
                 <form method="get">
-                 <button class="logoutbutton p" th:formaction="logout">Logout</button>
-                    </form>
+                    <button class="logoutbutton p" th:formaction="logout">Logout</button>
+                </form>
 
                 <div class="cart-img-container">
-                <p class="headercart p">
-                    <a href="http://localhost:7070/goToCart?">
-                        <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
+                    <p class="headercart p">
+                        <a href="http://localhost:7070/goToCart?">
+                            <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
                         </a>
                 </div>
                 </p>
@@ -96,6 +96,10 @@
                     <option value="9">9</option>
                     <option value="10">10</option>
                 </select>
+            </div>
+
+            <div class="cart-success p" th:if="${cartSuccess}">
+                <p th:text="${cartSuccess}"></p>
             </div>
 
             <div class="putincart">

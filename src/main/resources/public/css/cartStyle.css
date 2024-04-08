@@ -47,7 +47,9 @@
 
     padding: 10px;
     text-align: center;
+}
 
-
+.order-total-price {
+    align: right;
 }
 

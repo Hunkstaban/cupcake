@@ -85,25 +85,26 @@
 
             </div>
         </div>
-
+        <div class="order-total-price p putincart" th:if="${orderTotalPrice}">
+            <p th:text="'I alt: ' + ${orderTotalPrice} + ' kr.'"/>
+        </div>
         <div class="putincart">
-            <div class="order-total-price" th:if="${orderTotalPrice}">
-                <p th:text="'Total pris ' + ${orderTotalPrice} + ' kr.'"/>
-            </div>
             <form method="post">
                 <input name="orderTotalPrice" type="hidden" th:value="${orderTotalPrice}">
-                <button class="defbutton green" th:unless="${#lists.isEmpty(cartList)}" type="submit" formaction="newOrder" >Bestil</button>
+                <button class="defbutton green" th:unless="${#lists.isEmpty(cartList)}" type="submit"
+                        formaction="newOrder">Bestil
+                </button>
             </form>
             <form th:action="@{renderIndex}" method="get">
                 <button class="defbutton green">Køb mere</button>
             </form>
         </div>
 
-        <div class="insufficient-funds" th:if="${balanceError}">
+        <div class="insufficient-funds p" th:if="${balanceError}">
             <p th:text="${balanceError}"></p>
         </div>
 
-        <div class="order-completed" th:if="${orderCompleted}">
+        <div class="order-completed p" th:if="${orderCompleted}">
             <p th:text="${orderCompleted}"></p>
         </div>
     </div>
