@@ -26,11 +26,10 @@
 
 .centerpage {
     width: 42%;
-
 }
 
 .pagetext {
-    margin-top: 200px;
+    margin-top: 100px;
 
 }
 
@@ -41,32 +40,48 @@
 }
 
 /* Global header styles */
-.global-header {
+.global-header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    max-width: 1000px;
+    margin: 0 auto; /* Center horizontally */
     background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 
-.global-header .balance,
-.global-header .email,
-.global-header .logoutbutton,
-.global-header .cart-symbol {
+.global-header-img {
+    display: flex; /* Use flex to center the image */
+    justify-content: center;
+    align-items: center; /* Center vertically */
+}
+
+.global-header-img img {
+    max-height: 200px; /* Adjust the maximum height as needed */
+    width: auto; /* Let the width adjust proportionally */
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+}
+
+
+.global-header-content .balance,
+.global-header-content .email,
+.global-header-content .logoutbutton,
+.global-header-content .cart-symbol {
     font-family: Inter;
     font-weight: 400;
     font-size: 18px;
 }
 
-.global-header .logoutbutton {
+.global-header-content .logoutbutton {
     background-color: transparent;
     border: none;
     cursor: pointer;
     margin: 0 10px; /* Add space between logout button and email */
 }
 
-.global-header .cart-symbol img {
+.global-header-content .cart-symbol img {
     height: 40px;
     width: 40px;
 }

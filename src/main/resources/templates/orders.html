@@ -16,10 +16,15 @@
 <body>
 
 <header class="global-header">
-    <div class="email" th:text="${session.currentUser.email}"></div>
-    <form th:action="@{/logout}" method="get">
-        <button class="logoutbutton">Log ud</button>
-    </form>
+    <div class="global-header-img">
+        <img th:src="@{/images/cupcakeheaderimg.png}" />
+    </div>
+    <div class="global-header-content">
+        <div class="email" th:text="${session.currentUser.email}"></div>
+        <form th:action="@{/logout}" method="get">
+            <button class="logoutbutton">Log ud</button>
+        </form>
+    </div>
 </header>
 
 

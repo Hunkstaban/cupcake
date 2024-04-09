@@ -19,15 +19,20 @@
 
 
 <header class="global-header">
-    <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
-    <div class="email" th:text="${session.currentUser.email}"></div>
-    <form th:action="@{/logout}" method="get">
-        <button class="logoutbutton">Log ud</button>
-    </form>
-    <div class="cart-symbol">
-        <a th:href="@{/goToCart}">
-            <img th:src="@{/images/cart.png}" alt="Cart">
-        </a>
+    <div class="global-header-img">
+        <img th:src="@{/images/cupcakeheaderimg.png}" />
+    </div>
+    <div class="global-header-content">
+        <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
+        <div class="email" th:text="${session.currentUser.email}"></div>
+        <form th:action="@{/logout}" method="get">
+            <button class="logoutbutton">Log ud</button>
+        </form>
+        <div class="cart-symbol">
+            <a th:href="@{/goToCart}">
+                <img th:src="@{/images/cart.png}" alt="Cart">
+            </a>
+        </div>
     </div>
 </header>
 
@@ -73,10 +78,10 @@
 
             </div>
         </div>
-        <div class="order-total-price p putincart" th:if="${orderTotalPrice}">
-            <p th:text="'I alt: ' + ${orderTotalPrice} + ' kr.'"/>
-        </div>
         <div class="putincart">
+            <div class="order-total-price p putincart" th:if="${orderTotalPrice}">
+                <p th:text="'I alt: ' + ${orderTotalPrice} + ' kr.'"/>
+            </div>
             <form method="post">
                 <input name="orderTotalPrice" type="hidden" th:value="${orderTotalPrice}">
                 <button class="defbutton green" th:unless="${#lists.isEmpty(cartList)}" type="submit"

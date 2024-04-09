@@ -21,15 +21,20 @@
 <body>
 
 <header class="global-header">
-    <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
-    <div class="email" th:text="${session.currentUser.email}"></div>
-    <form th:action="@{/logout}" method="get">
-        <button class="logoutbutton">Log ud</button>
-    </form>
-    <div class="cart-symbol">
-        <a th:href="@{/goToCart}">
-            <img th:src="@{/images/cart.png}" alt="Cart">
-        </a>
+    <div class="global-header-img">
+        <img th:src="@{/images/cupcakeheaderimg.png}" />
+    </div>
+    <div class="global-header-content">
+        <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
+        <div class="email" th:text="${session.currentUser.email}"></div>
+        <form th:action="@{/logout}" method="get">
+            <button class="logoutbutton">Log ud</button>
+        </form>
+        <div class="cart-symbol">
+            <a th:href="@{/goToCart}">
+                <img th:src="@{/images/cart.png}" alt="Cart">
+            </a>
+        </div>
     </div>
 </header>
 
