@@ -16,6 +16,38 @@
     font-size: 18px;
 }
 
+/* Global header styles */
+.global-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.global-header .balance,
+.global-header .email,
+.global-header .logoutbutton,
+.global-header .cart-symbol {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.global-header .logoutbutton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px; /* Add space between logout button and email */
+}
+
+.global-header .cart-symbol img {
+    height: 40px;
+    width: 40px;
+}
+
+
 /********Phone********/
 
 @media screen and (max-width: 600px) {
