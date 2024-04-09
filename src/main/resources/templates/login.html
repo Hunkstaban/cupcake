@@ -27,11 +27,7 @@
             <input type="password" class=input id="password" name="password">
 
 
-            <div class="user-not-found" th:if="${loginError}">
-                <p th:text="${loginError}"></p>
-            </div>
-
-            <div class="user-not-found" th:if="${loginError}">
+            <div class="user-not-found p" th:if="${loginError}">
                 <p th:text="${loginError}"></p>
             </div>
 

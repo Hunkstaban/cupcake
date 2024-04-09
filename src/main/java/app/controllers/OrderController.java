@@ -65,10 +65,7 @@ public class OrderController {
         String msg = OrderDetailMapper.addToCart(baseID, toppingID, amount, user, connectionPool);
 
         // Amount of cupcakes currently
-        int cartQuantity = 0;
-        for (int i = 0; i < user.getCartList().size(); i++) {
-            cartQuantity++;
-        }
+        int cartQuantity = user.getCartList().size();
 
         ctx.attribute("cartSuccess", msg);
         ctx = CupcakeController.baseToppingAttributes(ctx, connectionPool);
