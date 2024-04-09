@@ -23,7 +23,9 @@
 <header class="global-header">
     <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
     <div class="email" th:text="${session.currentUser.email}"></div>
-    <button class="logoutbutton" formaction="logout">Logout</button>
+    <form th:action="@{/logout}" method="get">
+        <button class="logoutbutton">Log ud</button>
+    </form>
     <div class="cart-symbol">
         <a th:href="@{/goToCart}">
             <img th:src="@{/images/cart.png}" alt="Cart">
@@ -75,9 +77,6 @@
                 </select>
             </div>
 
-            <div class="cartsuccess p" th:if="${cartSuccess}">
-                <p th:text="${cartSuccess}"></p>
-            </div>
 
             <div class="putincart">
                 <button type="submit" formaction="addToCart" class="defbutton green">
@@ -86,12 +85,9 @@
             </div>
         </form>
 
-        <div class="putincart">
-            <form method="get">
-                <button formaction="goToCart" class="defbutton green">
-                    Gå til kurv
-                </button>
-            </form>
+        <div class="cartsuccess p" th:if="${cartSuccess}">
+            <p th:text="${cartSuccess}"/>
+            <a th:href="@{/goToCart}">Gå til kurv?</a>
         </div>
 
     </div>

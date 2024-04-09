@@ -22,7 +22,7 @@
     /*padding-top: 100px;*/
     margin-top: 70px;
     /*margin: 50px;*/
-    height: 200px;
+    height: 100px;
     display: flex;
     justify-content: center;
 
@@ -50,6 +50,7 @@
 .aref:hover {
     color: #4c76e0;
 }
+
 
 
 
