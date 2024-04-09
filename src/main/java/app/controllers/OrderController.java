@@ -96,7 +96,7 @@ public class OrderController {
             }
         } catch (DatabaseException e) {
             String msg = "Din saldo dækker desværre ikke denne bestilling."
-                        + "Fjern noget fra din ordre, eller kontakt en admin.";
+                        + " Fjern noget fra din ordre, eller kontakt en admin.";
             ctx.attribute("balanceError", msg);
             ctx.attribute("cartList", user.getCartList());
             ctx.attribute("orderTotalPrice", orderTotalPrice);
