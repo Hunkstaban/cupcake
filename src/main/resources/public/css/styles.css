@@ -16,6 +16,30 @@
     font-size: 18px;
 }
 
+#page {
+    width: 100%;
+    height: 2000px;
+    /*background-color: #14dcbe;*/
+    display: flex;
+    justify-content: center;
+}
+
+.centerpage {
+    width: 42%;
+
+}
+
+.pagetext {
+    margin-top: 200px;
+
+}
+
+.putincart {
+    display: flex;
+    justify-content: flex-end;
+    /*margin-top: 20px;*/
+}
+
 /* Global header styles */
 .global-header {
     display: flex;
