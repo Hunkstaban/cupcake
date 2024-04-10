@@ -46,22 +46,22 @@
     align-items: center;
     padding: 10px 20px;
     max-width: 1000px;
-    margin: 0 auto; /* Center horizontally */
+    margin: 0 auto;
     background-color: #f0f0f0;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 
 .global-header-img {
-    display: flex; /* Use flex to center the image */
+    display: flex;
     justify-content: center;
-    align-items: center; /* Center vertically */
+    align-items: center;
 }
 
 .global-header-img img {
-    max-height: 200px; /* Adjust the maximum height as needed */
-    width: auto; /* Let the width adjust proportionally */
-    max-width: 100%; /* Ensure the image doesn't exceed its container */
+    max-height: 200px;
+    width: auto;
+    max-width: 100%;
 }
 
 
@@ -78,7 +78,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin: 0 10px; /* Add space between logout button and email */
+    margin: 0 10px;
 }
 
 .global-header-content .cart-symbol img {
