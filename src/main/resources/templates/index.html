@@ -20,35 +20,20 @@
 
 <body>
 
-<header>
-    <div class="headers">
-        <div class="headersplacement">
-
-
-            <div class="headersleftside">
-                <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</p>
-            </div>
-
-            <!--  TODO indsæt cupcake billed her    -->
-
-            <div class="headersrightside">
-                <p class="headeremail p" th:text="${session.currentUser.email}"/>
-
-
-                <form method="get">
-                    <button class="logoutbutton p" th:formaction="logout">Logout</button>
-                </form>
-
-                <div class="cart-img-container">
-                    <p class="headercart p">
-                        <a href="http://localhost:7070/goToCart?">
-                            <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
-                        </a>
-                </div>
-                </p>
-
-            </div>
-
+<header class="global-header">
+    <div class="global-header-img">
+        <img th:src="@{/images/cupcakeheaderimg.png}" />
+    </div>
+    <div class="global-header-content">
+        <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
+        <div class="email" th:text="${session.currentUser.email}"></div>
+        <form th:action="@{/logout}" method="get">
+            <button class="logoutbutton">Log ud</button>
+        </form>
+        <div class="cart-symbol">
+            <a th:href="@{/goToCart}">
+                <img th:src="@{/images/cart.png}" alt="Cart">
+            </a>
         </div>
     </div>
 </header>
@@ -60,29 +45,29 @@
 
         <div class="pagetext">
             <h1 class="h1">
-                Velkommen
+                Velkommen!
             </h1>
 
             <h2 class="h2">
-                Øens bedste cupcakes. Vælg og bestil:
+                Øens bedste cupcakes. Vælg din bund, top og antal:
             </h2>
 
         </div>
         <form method="post">
             <div id="select">
-                <select name="base" id="bund" class="defbutton dropdownmarginright dropdownPadding" required>
+                <select name="base" id="bund" class="defbutton dropdownmarginright dropdownpadding" required>
                     <option value="">Vælg bund</option>
                     <option th:each="base : ${baseList}" th:value="${base.baseID}"
                             th:text="${base.baseName + ' - ' + base.basePrice + ' kr.'}"></option>
                 </select>
 
-                <select name="topping" id="top" class="defbutton dropdownmarginright dropdownPadding" required>
+                <select name="topping" id="top" class="defbutton dropdownmarginright dropdownpadding" required>
                     <option value="">Vælg top</option>
                     <option th:each="topping : ${toppingList}" th:value="${topping.toppingID}"
                             th:text="${topping.toppingName + ' - ' + topping.toppingPrice + ' kr.'}"></option>
                 </select>
 
-                <select name="amount" id="antal" class="defbutton dropdownPadding" required>
+                <select name="amount" id="antal" class="defbutton dropdownpadding" required>
                     <option value="">Antal</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -97,23 +82,17 @@
                 </select>
             </div>
 
-            <div class="cart-success p" th:if="${cartSuccess}">
-                <p th:text="${cartSuccess}"></p>
-            </div>
 
-            <div class="putincart">
+            <div class="confirmbutton">
                 <button type="submit" formaction="addToCart" class="defbutton green">
                     Læg i kurv
                 </button>
             </div>
         </form>
 
-        <div class="putincart">
-            <form method="get">
-                <button formaction="goToCart" class="defbutton green">
-                    Gå til kurv
-                </button>
-            </form>
+        <div class="cartsuccess p" th:if="${cartSuccess}">
+            <p th:text="${cartSuccess}"/>
+            <a th:href="@{/goToCart}">Gå til kurv?</a>
         </div>
 
     </div>

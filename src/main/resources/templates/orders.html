@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Orders</title>
-    <link rel="stylesheet" href="../../public/css/orderStyle.css" th:href="@{/css/orderStyle.css}">
-    <link rel="stylesheet" href="../../public/css/styles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/orderStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,25 +15,15 @@
 </head>
 <body>
 
-<header>
-    <div class="headers">
-        <div class="headersplacement">
-            <!--  TODO thymelead link til mail,saldo og cart ikon  -->
-
-            <!--  TODO  indsæt billed her    -->
-
-            <div class="headersrightside">
-                <p class="headeremail p" th:text="${session.currentUser.email}"/>
-                <form method="get">
-                    <button class="logoutbutton p" th:formaction="logout">Logout</button>
-                </form>
-                <p class="headercart p">
-                    <a href="cart.html">
-                        <img src="../images/cart.png" height="40" width="40"/>
-                    </a>
-                </p>
-            </div>
-        </div>
+<header class="global-header">
+    <div class="global-header-img">
+        <img th:src="@{/images/cupcakeheaderimg.png}" />
+    </div>
+    <div class="global-header-content">
+        <div class="email" th:text="${session.currentUser.email}"></div>
+        <form th:action="@{/logout}" method="get">
+            <button class="logoutbutton">Log ud</button>
+        </form>
     </div>
 </header>
 

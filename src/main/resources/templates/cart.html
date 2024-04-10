@@ -8,7 +8,6 @@
 
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" href="../public/css/indexStyle.css" th:href="@{/css/indexStyle.css}">
     <link rel="stylesheet" href="../public/css/cartStyle.css" th:href="@{/css/cartStyle.css}">
 
 
@@ -19,26 +18,20 @@
 <body>
 
 
-<header>
-    <div class="headers">
-        <div class="headersplacement">
-
-            <div class="headersleftside">
-                <p class="headersaldo p">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</p>
-            </div>
-
-            <div class="headersrightside">
-                <p class="headeremail p" th:text="${session.currentUser.email}"/>
-
-                <form method="get">
-                    <button class="logoutbutton p" th:formaction="logout">Logout</button>
-                </form>
-
-                <a href="http://localhost:7070/goToCart?">
-                    <img src="../public/images/cart.png" th:src="@{/images/cart.png}" height="40" width="40"/>
-                </a>
-            </div>
-
+<header class="global-header">
+    <div class="global-header-img">
+        <img th:src="@{/images/cupcakeheaderimg.png}" />
+    </div>
+    <div class="global-header-content">
+        <div class="balance">Saldo: <span th:text="${session.currentUser.balance}"></span> kr.</div>
+        <div class="email" th:text="${session.currentUser.email}"></div>
+        <form th:action="@{/logout}" method="get">
+            <button class="logoutbutton">Log ud</button>
+        </form>
+        <div class="cart-symbol">
+            <a th:href="@{/goToCart}">
+                <img th:src="@{/images/cart.png}" alt="Cart">
+            </a>
         </div>
     </div>
 </header>
@@ -85,10 +78,10 @@
 
             </div>
         </div>
-        <div class="order-total-price p putincart" th:if="${orderTotalPrice}">
-            <p th:text="'I alt: ' + ${orderTotalPrice} + ' kr.'"/>
-        </div>
-        <div class="putincart">
+        <div class="confirmbutton">
+            <div class="order-total-price p" th:if="${orderTotalPrice}">
+                <p th:text="'I alt: ' + ${orderTotalPrice} + ' kr.'"/>
+            </div>
             <form method="post">
                 <input name="orderTotalPrice" type="hidden" th:value="${orderTotalPrice}">
                 <button class="defbutton green" th:unless="${#lists.isEmpty(cartList)}" type="submit"

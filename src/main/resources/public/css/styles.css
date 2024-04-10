@@ -16,6 +16,77 @@
     font-size: 18px;
 }
 
+#page {
+    width: 100%;
+    height: 2000px;
+    /*background-color: #14dcbe;*/
+    display: flex;
+    justify-content: center;
+}
+
+.centerpage {
+    width: 42%;
+}
+
+.pagetext {
+    margin-top: 100px;
+
+}
+
+.confirmbutton {
+    display: flex;
+    justify-content: flex-end;
+    /*margin-top: 20px;*/
+}
+
+/* Global header styles */
+.global-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.global-header-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.global-header-img img {
+    max-height: 200px;
+    width: auto;
+    max-width: 100%;
+}
+
+
+.global-header-content .balance,
+.global-header-content .email,
+.global-header-content .logoutbutton,
+.global-header-content .cart-symbol {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.global-header-content .logoutbutton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.global-header-content .cart-symbol img {
+    height: 40px;
+    width: 40px;
+}
+
+
 /********Phone********/
 
 @media screen and (max-width: 600px) {
