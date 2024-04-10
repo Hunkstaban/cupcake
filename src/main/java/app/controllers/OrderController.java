@@ -86,7 +86,7 @@ public class OrderController {
                 int orderID = OrderDetailMapper.newOrder(user, connectionPool);
                 OrderDetailMapper.insertOrderDetails(user, orderID, connectionPool);
 
-                // If order completed, empty currentUser's cart and refresh the page, sending a order completed attribute
+                // If order completed, empty currentUser's cart and refresh the page, sending an order completed attribute
                 user.emptyCart();
                 String msg = "Tak for din bestilling!\n Din ordre er registreret med ordre nr.: " + orderID;
                 ctx.attribute("orderCompleted", msg);
