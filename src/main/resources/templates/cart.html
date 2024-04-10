@@ -84,12 +84,12 @@
             </div>
             <form method="post">
                 <input name="orderTotalPrice" type="hidden" th:value="${orderTotalPrice}">
-                <button class="defbutton green" th:unless="${#lists.isEmpty(cartList)}" type="submit"
+                <button class="cartbtn defbutton green" th:unless="${#lists.isEmpty(cartList)}" type="submit"
                         formaction="newOrder">Bestil
                 </button>
             </form>
             <form th:action="@{renderIndex}" method="get">
-                <button class="defbutton green">Køb mere</button>
+                <button class="cartbtn defbutton green">Køb mere</button>
             </form>
         </div>
 

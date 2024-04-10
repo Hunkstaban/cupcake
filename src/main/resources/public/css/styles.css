@@ -144,7 +144,7 @@
 .green:hover {
     background-color: #4ce052;
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.03);
 }
 
 .logoutbutton{
