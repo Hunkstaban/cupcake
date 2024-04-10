@@ -78,8 +78,8 @@
 
             </div>
         </div>
-        <div class="putincart">
-            <div class="order-total-price p putincart" th:if="${orderTotalPrice}">
+        <div class="confirmbutton">
+            <div class="order-total-price p" th:if="${orderTotalPrice}">
                 <p th:text="'I alt: ' + ${orderTotalPrice} + ' kr.'"/>
             </div>
             <form method="post">
