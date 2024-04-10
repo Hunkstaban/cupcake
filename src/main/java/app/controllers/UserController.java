@@ -21,7 +21,7 @@ public class UserController {
 
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
-        app.get("create", ctx -> createUser(ctx, connectionPool));
+        app.post("create", ctx -> createUser(ctx, connectionPool));
         app.get("renderIndex", ctx -> renderIndex(ctx, connectionPool));
 
 
