@@ -1,0 +1,628 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.2 (Debian 16.2-1.pgdg120+2)
+-- Dumped by pg_dump version 16.1
+
+-- Started on 2024-05-03 10:55:14 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- TOC entry 3431 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 215 (class 1259 OID 33093)
+-- Name: bases; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bases (
+    base_id integer NOT NULL,
+    base_name character varying(100) NOT NULL,
+    base_price integer NOT NULL
+);
+
+
+ALTER TABLE public.bases OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 33096)
+-- Name: bases_base_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bases_base_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.bases_base_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3432 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: bases_base_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bases_base_id_seq OWNED BY public.bases.base_id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 33097)
+-- Name: get all bases; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public."get all bases" AS
+ SELECT base_id,
+    base_name,
+    base_price
+   FROM public.bases
+  ORDER BY base_id;
+
+
+ALTER VIEW public."get all bases" OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 33101)
+-- Name: toppings; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.toppings (
+    topping_id integer NOT NULL,
+    topping_name character varying(100) NOT NULL,
+    topping_price integer NOT NULL
+);
+
+
+ALTER TABLE public.toppings OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 33104)
+-- Name: get all toppings; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public."get all toppings" AS
+ SELECT topping_id,
+    topping_name,
+    topping_price
+   FROM public.toppings
+  ORDER BY topping_id;
+
+
+ALTER VIEW public."get all toppings" OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 33108)
+-- Name: order_details; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.order_details (
+    order_detail_id integer NOT NULL,
+    base_id integer NOT NULL,
+    topping_id integer NOT NULL,
+    amount integer NOT NULL,
+    total_price integer NOT NULL,
+    order_id integer NOT NULL
+);
+
+
+ALTER TABLE public.order_details OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 33111)
+-- Name: order_details_order_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.order_details_order_detail_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.order_details_order_detail_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3433 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: order_details_order_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.order_details_order_detail_id_seq OWNED BY public.order_details.order_detail_id;
+
+
+--
+-- TOC entry 222 (class 1259 OID 33112)
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.orders (
+    order_id integer NOT NULL,
+    user_id integer NOT NULL,
+    date date DEFAULT CURRENT_DATE NOT NULL
+);
+
+
+ALTER TABLE public.orders OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 33115)
+-- Name: orders_order_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.orders_order_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.orders_order_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3434 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: orders_order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.orders_order_id_seq OWNED BY public.orders.order_id;
+
+
+--
+-- TOC entry 224 (class 1259 OID 33116)
+-- Name: roles; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.roles (
+    role_id integer NOT NULL,
+    role_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.roles OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 33119)
+-- Name: roles_role_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.roles_role_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.roles_role_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3435 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: roles_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.roles_role_id_seq OWNED BY public.roles.role_id;
+
+
+--
+-- TOC entry 226 (class 1259 OID 33120)
+-- Name: toppings_topping_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.toppings_topping_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.toppings_topping_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3436 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: toppings_topping_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.toppings_topping_id_seq OWNED BY public.toppings.topping_id;
+
+
+--
+-- TOC entry 227 (class 1259 OID 33121)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    user_id integer NOT NULL,
+    email character varying(100) NOT NULL,
+    password character varying(100) NOT NULL,
+    role_id integer DEFAULT 1 NOT NULL,
+    balance integer DEFAULT 100 NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 33126)
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.users_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3437 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
+
+
+--
+-- TOC entry 229 (class 1259 OID 41277)
+-- Name: view_all_orders; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.view_all_orders AS
+ SELECT orders.order_id,
+    users.email,
+    bases.base_name,
+    toppings.topping_name,
+    order_details.amount,
+    order_details.total_price,
+    orders.date
+   FROM ((((public.order_details
+     JOIN public.orders ON ((order_details.order_id = orders.order_id)))
+     JOIN public.users ON ((orders.user_id = users.user_id)))
+     JOIN public.bases ON ((order_details.base_id = bases.base_id)))
+     JOIN public.toppings ON ((order_details.topping_id = toppings.topping_id)))
+  GROUP BY orders.order_id, users.email, bases.base_name, toppings.topping_name, order_details.amount, order_details.total_price, orders.date
+  ORDER BY orders.order_id DESC;
+
+
+ALTER VIEW public.view_all_orders OWNER TO postgres;
+
+--
+-- TOC entry 3240 (class 2604 OID 33127)
+-- Name: bases base_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bases ALTER COLUMN base_id SET DEFAULT nextval('public.bases_base_id_seq'::regclass);
+
+
+--
+-- TOC entry 3242 (class 2604 OID 33128)
+-- Name: order_details order_detail_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.order_details ALTER COLUMN order_detail_id SET DEFAULT nextval('public.order_details_order_detail_id_seq'::regclass);
+
+
+--
+-- TOC entry 3243 (class 2604 OID 33129)
+-- Name: orders order_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN order_id SET DEFAULT nextval('public.orders_order_id_seq'::regclass);
+
+
+--
+-- TOC entry 3245 (class 2604 OID 33130)
+-- Name: roles role_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.roles ALTER COLUMN role_id SET DEFAULT nextval('public.roles_role_id_seq'::regclass);
+
+
+--
+-- TOC entry 3241 (class 2604 OID 33131)
+-- Name: toppings topping_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.toppings ALTER COLUMN topping_id SET DEFAULT nextval('public.toppings_topping_id_seq'::regclass);
+
+
+--
+-- TOC entry 3246 (class 2604 OID 33132)
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 3414 (class 0 OID 33093)
+-- Dependencies: 215
+-- Data for Name: bases; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.bases VALUES (1, 'Chocolate', 5);
+INSERT INTO public.bases VALUES (2, 'Vanilla', 5);
+INSERT INTO public.bases VALUES (3, 'Nutmeg', 5);
+INSERT INTO public.bases VALUES (4, 'Pistacio', 6);
+INSERT INTO public.bases VALUES (5, 'Almond', 7);
+
+
+--
+-- TOC entry 3417 (class 0 OID 33108)
+-- Dependencies: 220
+-- Data for Name: order_details; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.order_details VALUES (2, 1, 1, 3, 30, 1);
+INSERT INTO public.order_details VALUES (3, 3, 2, 2, 20, 1);
+INSERT INTO public.order_details VALUES (4, 3, 4, 2, 22, 8);
+INSERT INTO public.order_details VALUES (5, 1, 2, 2, 20, 9);
+INSERT INTO public.order_details VALUES (6, 2, 3, 2, 20, 10);
+
+
+--
+-- TOC entry 3419 (class 0 OID 33112)
+-- Dependencies: 222
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.orders VALUES (1, 6, '2024-07-04');
+INSERT INTO public.orders VALUES (8, 5, '2024-04-09');
+INSERT INTO public.orders VALUES (9, 5, '2024-04-09');
+INSERT INTO public.orders VALUES (10, 5, '2024-04-10');
+
+
+--
+-- TOC entry 3421 (class 0 OID 33116)
+-- Dependencies: 224
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.roles VALUES (1, 'admin');
+INSERT INTO public.roles VALUES (2, 'customer');
+
+
+--
+-- TOC entry 3416 (class 0 OID 33101)
+-- Dependencies: 218
+-- Data for Name: toppings; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.toppings VALUES (1, 'Chocolate', 5);
+INSERT INTO public.toppings VALUES (2, 'Blueberry', 5);
+INSERT INTO public.toppings VALUES (3, 'Raspberry', 5);
+INSERT INTO public.toppings VALUES (4, 'Crispy', 6);
+INSERT INTO public.toppings VALUES (5, 'Strawberry', 6);
+INSERT INTO public.toppings VALUES (6, 'Rum/Raisin', 7);
+INSERT INTO public.toppings VALUES (7, 'Orange', 8);
+INSERT INTO public.toppings VALUES (8, 'Lemon', 8);
+INSERT INTO public.toppings VALUES (9, 'Blue cheese', 9);
+
+
+--
+-- TOC entry 3424 (class 0 OID 33121)
+-- Dependencies: 227
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.users VALUES (2, 'oliver@oliver.dk', '1234', 1, 100);
+INSERT INTO public.users VALUES (3, 'peter@peter.dk', '1234', 1, 100);
+INSERT INTO public.users VALUES (4, 'admin@admin.dk', '1234', 2, 100);
+INSERT INTO public.users VALUES (6, 'toby@toby.dk', '1234', 1, 100);
+INSERT INTO public.users VALUES (5, 'emil@emil.dk', '1234', 1, 418);
+
+
+--
+-- TOC entry 3438 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: bases_base_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.bases_base_id_seq', 5, true);
+
+
+--
+-- TOC entry 3439 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: order_details_order_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.order_details_order_detail_id_seq', 6, true);
+
+
+--
+-- TOC entry 3440 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: orders_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.orders_order_id_seq', 10, true);
+
+
+--
+-- TOC entry 3441 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: roles_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.roles_role_id_seq', 2, true);
+
+
+--
+-- TOC entry 3442 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: toppings_topping_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.toppings_topping_id_seq', 9, true);
+
+
+--
+-- TOC entry 3443 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_user_id_seq', 9, true);
+
+
+--
+-- TOC entry 3250 (class 2606 OID 33134)
+-- Name: bases bases_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bases
+    ADD CONSTRAINT bases_pkey PRIMARY KEY (base_id);
+
+
+--
+-- TOC entry 3260 (class 2606 OID 33136)
+-- Name: users email_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT email_unique UNIQUE (email);
+
+
+--
+-- TOC entry 3254 (class 2606 OID 33138)
+-- Name: order_details order_details_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.order_details
+    ADD CONSTRAINT order_details_pkey PRIMARY KEY (order_detail_id);
+
+
+--
+-- TOC entry 3256 (class 2606 OID 33140)
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (order_id);
+
+
+--
+-- TOC entry 3258 (class 2606 OID 33142)
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (role_id);
+
+
+--
+-- TOC entry 3252 (class 2606 OID 33144)
+-- Name: toppings toppings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.toppings
+    ADD CONSTRAINT toppings_pkey PRIMARY KEY (topping_id);
+
+
+--
+-- TOC entry 3262 (class 2606 OID 33146)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3263 (class 2606 OID 33147)
+-- Name: order_details base_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.order_details
+    ADD CONSTRAINT base_fkey FOREIGN KEY (base_id) REFERENCES public.bases(base_id) NOT VALID;
+
+
+--
+-- TOC entry 3264 (class 2606 OID 33152)
+-- Name: order_details order_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.order_details
+    ADD CONSTRAINT order_fkey FOREIGN KEY (order_id) REFERENCES public.orders(order_id);
+
+
+--
+-- TOC entry 3267 (class 2606 OID 33157)
+-- Name: users role_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT role_fkey FOREIGN KEY (role_id) REFERENCES public.roles(role_id) NOT VALID;
+
+
+--
+-- TOC entry 3265 (class 2606 OID 33162)
+-- Name: order_details topping_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.order_details
+    ADD CONSTRAINT topping_fkey FOREIGN KEY (topping_id) REFERENCES public.toppings(topping_id) NOT VALID;
+
+
+--
+-- TOC entry 3266 (class 2606 OID 33167)
+-- Name: orders user_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id) NOT VALID;
+
+
+-- Completed on 2024-05-03 10:55:15 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+
