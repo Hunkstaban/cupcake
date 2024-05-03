@@ -1,6 +1,6 @@
 --
 -- PostgreSQL database dump
---
+-- remember to delete puplic scheme if allready there
 
 -- Dumped from database version 16.2 (Debian 16.2-1.pgdg120+2)
 -- Dumped by pg_dump version 16.1
